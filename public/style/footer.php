@@ -36,7 +36,7 @@
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Outing Class</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Project</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Enterpreneur</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Halaqoh</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Study</a></li>
         </ul>
       </div>
 
@@ -44,8 +44,8 @@
         <h5>Informasi</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pendaftaran</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Kurikulum</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Registration</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Curriculum</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
         </ul>
       </div>

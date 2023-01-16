@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
+// use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,12 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [controller::class, 'index'])->name('welcome');
+// Route::get('/', [controller::class, 'index'])->name('welcome');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route Resources
+// route::resource('/students', \App\Http\Controllers\StudentsController::class);
+Route::resource('/posts', \App\Http\Controllers\PostController::class);
