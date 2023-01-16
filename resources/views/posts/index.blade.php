@@ -27,6 +27,7 @@
         </h1>
 
         <table class="table table-primary table-striped-columns">
+            <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
             <thead>
                 <tr class="table-success">
                     <th scope="col">
@@ -57,20 +58,20 @@
                 @forelse($posts as $pdata)
                 <tr>
                     <td>{{ $pdata->id }}</td>
-                    <td>{{ $pdata->image }}</td>
+                    <td class="text-center">
+                        <img src="{{ Storage::url('public/posts/').$pdata->image }}" class="rounded" style="width: 150px">
+                    </td>
                     <td>{{ $pdata->title }}</td>
                     <td>{{ $pdata->content }}</td>
                     <td>{{ $pdata->created_at}}</td>
                     <td>{{ $pdata->updated_at}}</td>
-                    <td>
-                        <a href="proses/edit.php?id={{ $pdata->id }}">
-                            Edit
-                        </a>
-                    </td>
-                    <td>
-                        <a href="proses/delete.php?id={{ $pdata->id }}">
-                            Hapus
-                        </a>
+                    <td class="text-center">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('posts.destroy', $pdata->id) }}" method="POST">
+                            <a href="{{ route('posts.edit', $pdata->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                        </form>
                     </td>
                 </tr>
 
@@ -92,6 +93,18 @@
     ?>
     <!-- End Footer Code -->
 
+    <!-- <script>
+        //message with toastr
+        @if(session()->has('success'))
+        
+            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+
+        @elseif(session()->has('error'))
+
+            toastr.error('{{ session('error') }}', 'GAGAL!'); 
+            
+        @endif
+    </script> -->
 </body>
 <?php include('style/script.php'); ?>
 
