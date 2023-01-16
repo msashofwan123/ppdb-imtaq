@@ -26,7 +26,7 @@
             <center>POST DATA
         </h1>
 
-        <table class="table table-primary table-striped-columns">
+        <table class="table table-striped-columns">
             <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
             <thead>
                 <tr class="table-success">
@@ -62,7 +62,7 @@
                         <img src="{{ Storage::url('public/posts/').$pdata->image }}" class="rounded" style="width: 150px">
                     </td>
                     <td>{{ $pdata->title }}</td>
-                    <td>{{ $pdata->content }}</td>
+                    <td>{!! $pdata->content !!}</td>
                     <td>{{ $pdata->created_at}}</td>
                     <td>{{ $pdata->updated_at}}</td>
                     <td class="text-center">
@@ -92,7 +92,7 @@
     include("style/footer.php")
     ?>
     <!-- End Footer Code -->
-
+    <?php include('style/script.php'); ?>
     <!-- <script>
         //message with toastr
         @if(session()->has('success'))
@@ -106,6 +106,6 @@
         @endif
     </script> -->
 </body>
-<?php include('style/script.php'); ?>
+
 
 </html>
