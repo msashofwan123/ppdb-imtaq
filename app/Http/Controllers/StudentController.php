@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -31,7 +32,7 @@ class StudentController extends Controller
         return view('students.create');
     }
 
-        /**
+    /**
      * store
      *
      * @param Request $request
@@ -41,27 +42,107 @@ class StudentController extends Controller
     {
         //validate form
         $request->validate([
-            'number'     => 'required|between:9,10',
+            'number'     => 'required|min:10|max:10',
             'name'     => 'required|min:3',
-            'photo'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email'     => 'required|email',
-            'phone'   => 'required|numeric|between:9,18'
+            'phone'   => 'required|min:9',
+            'photo'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         //upload image
         $image = $request->file('photo');
         $image->storeAs('public/students', $image->hashName());
 
-        //create post
+        //create Student
         Student::create([
             'number'    => $request->number,
             'name'      => $request->name,
-            'photo'     => $image->hashName(),
             'email'     => $request->email,
-            'phone'     => $request->phone
+            'phone'     => $request->phone,
+            'photo'     => $image->hashName()
         ]);
 
         //redirect to index
         return redirect()->route('students.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    }
+
+    /**
+     * edit
+     *
+     * @param  mixed $student
+     * @return void
+     */
+    public function edit(Student $student)
+    {
+        return view('students.edit', compact('student'));
+    }
+
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @param  mixed $student
+     * @return void
+     */
+    public function update(Request $request, Student $student)
+    {
+        //validate form
+        $request->validate([
+            'number'    => 'required|min:10|max:10',
+            'name'      => 'required|min:3',
+            'email'     => 'required|email',
+            'phone'     => 'required|min:9',
+            'photo'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        //check if image is uploaded
+        if ($request->hasFile('photo')) {
+
+            //upload new image
+            $image = $request->file('photo');
+            $image->storeAs('public/students', $image->hashName());
+
+            //delete old image
+            Storage::delete('public/students/' . $student->image);
+
+            //update student with new image
+            $student->update([
+                'number'    => $request->number,
+                'name'      => $request->name,
+                'email'     => $request->email,
+                'phone'     => $request->phone,
+                'photo'     => $image->hashName()
+            ]);
+        } else {
+
+            //update post without image
+            $student->update([
+                'number'    => $request->number,
+                'name'      => $request->name,
+                'email'     => $request->email,
+                'phone'     => $request->phone
+            ]);
+        }
+
+        //redirect to index
+        return redirect()->route('students.index')->with(['success' => 'Data Berhasil Diubah!']);
+    }
+
+        /**
+     * destroy
+     *
+     * @param  mixed $student
+     * @return void
+     */
+    public function destroy(Student $student)
+    {
+        //delete image
+        Storage::delete('public/students/'. $student->photo);
+
+        //delete post
+        $student->delete();
+
+        //redirect to index
+        return redirect()->route('students.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

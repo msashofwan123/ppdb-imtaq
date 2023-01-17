@@ -9,11 +9,13 @@ class Student extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'number',
         'name',
-        'photo',
         'email',
         'phone',
+        'photo',
     ];
 }

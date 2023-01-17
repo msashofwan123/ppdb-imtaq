@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->integer('number',25); 
+            $table->biginteger('number'); 
             $table->string('name');
-            $table->string('photo');
             $table->string('email');
-            $table->integer('phone',18);
+            $table->biginteger('phone');
+            $table->string('photo');
+            $table->timestamps(false);
         });
     }
 
