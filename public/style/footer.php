@@ -32,7 +32,7 @@
       <div class="col mb-3">
         <h5>Galeri</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">KBM</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Learning</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Outing Class</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Project</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Enterpreneur</a></li>
