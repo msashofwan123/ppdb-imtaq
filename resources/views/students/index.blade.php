@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Data Post</title>
+    <title>Data Siswa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="style/idbc-favicon.ico">
 </head>
@@ -23,30 +23,30 @@
     <!-- Awal Data Table -->
     <div id="table" class="container">
         <h1>
-            <center>POST DATA
+            <center>Data Siswa Aktif
         </h1>
 
         <table class="table table-striped-columns">
-            <a href="{{ route('posts.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
+            <a href="{{ route('students.create') }}" class="btn btn-md btn-success mb-3">TAMBAH SISWA</a>
             <thead>
                 <tr class="table-success">
                     <th scope="col">
                         <center>ID
                     </th>
                     <th scope="col">
-                        <center>Image
+                        <center>NISN
                     </th>
                     <th scope="col">
-                        <center>Title
+                        <center>Name
                     </th>
                     <th scope="col">
-                        <center>Content
+                        <center>Photo
                     </th>
                     <th scope="col">
-                        <center>Created At
+                        <center>Email
                     </th>
                     <th scope="col">
-                        <center>Updated At
+                        <center>Phone
                     </th>
                     <th scope="col" colspan="2">
                         <center>Action
@@ -55,19 +55,19 @@
             </thead>
 
             <tbody>
-                @forelse($posts as $pdata)
+                @forelse($students as $student)
                 <tr>
-                    <td>{{ $pdata->id }}</td>
+                    <td>{{ $student->id }}</td>
+                    <td>{{ $student->number }}</td>
+                    <td>{{ $student->name }}</td>
                     <td class="text-center">
-                        <img src="{{ Storage::url('public/posts/').$pdata->image }}" class="rounded" style="width: 150px">
+                        <img src="{{ Storage::url('public/students/').$student->image }}" class="rounded" style="width: 150px">
                     </td>
-                    <td>{{ $pdata->title }}</td>
-                    <td>{!! $pdata->content !!}</td>
-                    <td>{{ $pdata->created_at}}</td>
-                    <td>{{ $pdata->updated_at}}</td>
+                    <td>{{ $student->email}}</td>
+                    <td>{{ $student->phone}}</td>
                     <td class="text-center">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('posts.destroy', $pdata->id) }}" method="POST">
-                            <a href="{{ route('posts.edit', $pdata->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('students.destroy', $student->id) }}" method="POST">
+                            <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -84,7 +84,7 @@
             </tbody>
             <!-- Akhir Data Table -->
         </table>
-        {{ $posts->Links() }}
+        {{ $students->Links() }}
     </div>
 
     <!-- Start Footer Code -->

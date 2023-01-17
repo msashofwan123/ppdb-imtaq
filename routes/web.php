@@ -23,3 +23,4 @@ Route::get('/', function () {
 // Route Resources
 // route::resource('/students', \App\Http\Controllers\StudentsController::class);
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
+Route::resource('/students', \App\Http\Controllers\StudentController::class);
