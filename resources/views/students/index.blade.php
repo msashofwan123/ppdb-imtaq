@@ -87,12 +87,14 @@
             </tbody>
             <!-- Akhir Data Table -->
         </table>
-        <!-- {{ $students->Links() }} -->
+        <div>
+            <!-- {{ $students->Links() }} -->
+        </div>
     </div>
 
     <!-- Start Footer Code -->
     <?php
-    include("style/footer.php")
+    // include("style/footer.php")
     ?>
     <!-- End Footer Code -->
     <?php include('style/script.php'); ?>

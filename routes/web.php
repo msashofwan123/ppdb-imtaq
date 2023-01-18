@@ -24,3 +24,6 @@ Route::get('/', function () {
 // route::resource('/students', \App\Http\Controllers\StudentsController::class);
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
 Route::resource('/students', \App\Http\Controllers\StudentController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

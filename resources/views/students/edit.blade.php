@@ -1,3 +1,6 @@
+@extends('layouts.admin')
+@section('content')
+
 <!doctype html>
 <html lang="en">
 
@@ -15,7 +18,7 @@
     <main>
         <!-- Awal Header -->
         <?php
-        include("style/header.php");
+        // include("style/header.php");
         ?>
         <!-- Akhir Header -->
 
@@ -87,7 +90,7 @@
                                 <div>
                                     <img src="{{ Storage::url('public/students/').$student->photo }}" class="rounded" style="width: 200px">
                                 </div>
-                                <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo">
+                                <input type="file" class="form-control @error('photo') is-invalid @enderror" value="" name="photo">
 
                                 <!-- error message untuk title -->
                                 @error('photo')
@@ -111,15 +114,17 @@
 
     <!-- Start Footer Code -->
     <?php
-    include("style/footer.php")
+    // include("style/footer.php")
     ?>
     <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
     <script>
-        CKEDITOR.replace('content');
+        // CKEDITOR.replace('content');
     </script>
 
 </body>
 
 
 </html>
+
+@stop

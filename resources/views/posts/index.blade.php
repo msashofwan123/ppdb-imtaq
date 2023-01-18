@@ -1,3 +1,6 @@
+@extends('layouts.admin')
+@section('content')
+
 <!doctype html>
 <html lang="en">
 
@@ -14,7 +17,7 @@
     <main>
         <!-- Awal Header -->
         <?php
-        include("style/header.php");
+        // include("style/header.php");
         ?>
         <!-- Akhir Header -->
 
@@ -84,12 +87,11 @@
             </tbody>
             <!-- Akhir Data Table -->
         </table>
-        {{ $posts->Links() }}
     </div>
 
     <!-- Start Footer Code -->
     <?php
-    include("style/footer.php")
+    // include("style/footer.php")
     ?>
     <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
@@ -109,3 +111,4 @@
 
 
 </html>
+@stop

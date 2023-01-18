@@ -92,7 +92,7 @@ class StudentController extends Controller
             'name'      => 'required|min:3',
             'email'     => 'required|email',
             'phone'     => 'required|min:9',
-            'photo'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         //check if image is uploaded
