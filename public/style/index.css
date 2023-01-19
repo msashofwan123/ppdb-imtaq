@@ -1,0 +1,57 @@
+#logo {
+    padding-left: 30px;
+    font-family: 'Segoe UI';
+    font-weight: bolder;
+}
+
+#ls-button {
+    padding-right: 30px;
+}
+
+#login {
+    padding-right: 10px;
+}
+
+#login-button {
+    padding-right: 20px;
+}
+#logout {
+    padding-right: 20px;
+}
+
+#log {
+    color: lightgreen;
+}
+#signup {
+    background-color: white;
+    color: #198754;
+    transition: background-color 0.4s;
+}
+#signup:hover {
+    background-color: #198754;
+    color: lightcyan;
+}
+
+#a-copyright {
+    text-decoration: none;
+    color: black;
+}
+
+.header-name {
+    color: #044e2b;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    background-color: #3acb87;
+}
+
+.header-profil {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #198754;
+    font-weight: bold;
+    text-align: center;
+}
+
+#search-bar {
+    padding-right: 10px;
+}

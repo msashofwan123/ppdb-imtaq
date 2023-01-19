@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+// use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\PostController;
+// use App\Http\Controllers\Auth;
 // use App\Http\Controllers\Controller;
 
 /*
@@ -22,8 +28,21 @@ Route::get('/', function () {
 
 // Route Resources
 // route::resource('/students', \App\Http\Controllers\StudentsController::class);
-Route::resource('/posts', \App\Http\Controllers\PostController::class);
-Route::resource('/students', \App\Http\Controllers\StudentController::class);
+
+Route::get('/', [HomeController::class, 'index']);
+
+Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@login']);
+Route::middleware(['auth', 'user-access'])->group(function () {
+    Route::resource('students', StudentController::class);
+});
+
+Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@login']);
+Route::middleware(['auth', 'user-access'])->group(function () {
+    Route::resource('posts', PostController::class);
+});
+
+// Route::resource('/posts', \App\Http\Controllers\PostController::class);
+// Route::resource('/students', \App\Http\Controllers\StudentController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

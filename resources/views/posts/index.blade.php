@@ -49,7 +49,7 @@
                         <center>Created At
                     </th>
                     <th scope="col">
-                        <center>Updated At
+                        <center>Last Update
                     </th>
                     <th scope="col" colspan="2">
                         <center>Action
@@ -73,7 +73,7 @@
                             <a href="{{ route('posts.edit', $pdata->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                            <button type="submit" class="btn btn-sm btn-danger">DELETE</button>
                         </form>
                     </td>
                 </tr>

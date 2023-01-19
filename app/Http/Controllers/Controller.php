@@ -17,6 +17,7 @@ class Controller extends BaseController
 {
     public function index()
     {
+
         // Mengambil data dari tabel pendaftaran
         $dataPendaftar = DB::table('pendaftaran')->get();
     
