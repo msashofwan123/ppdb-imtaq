@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\MemberController;
 // use App\Http\Controllers\Auth;
 // use App\Http\Controllers\Controller;
 
@@ -45,6 +46,11 @@ Route::middleware(['auth', 'user-access'])->group(function () {
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
 Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('groups', GroupController::class);
+});
+
+Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
+Route::middleware(['auth', 'user-access'])->group(function () {
+    Route::resource('members', MemberController::class);
 });
 
 
