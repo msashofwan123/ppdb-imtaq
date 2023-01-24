@@ -6,7 +6,6 @@ use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 
 class GroupController extends Controller
@@ -68,21 +67,17 @@ class GroupController extends Controller
         return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
-
     /**
      * edit
-     *
+     * 
      * @param  mixed $group
      * @return void
      */
     public function edit(Group $group)
     {
-        // $selectedUserId = $group->id;
-        // return view('groups.edit', ['group' => $group, 'selectedUserId' => $selectedUserId]);
-        // return view('groups.edit', compact('group'));
-
-        $group = User::all();
-        return view('groups.edit', compact('group'));
+        $selectedUserId = $group->user_id;
+        $group = Group::all();
+        return view('groups.edit', compact('group', 'selectedUserId'));
     }
 
     /**
@@ -96,21 +91,22 @@ class GroupController extends Controller
     {
         //validate form
         $request->validate([
-            'user_id'     => 'required',
-            'name'     => 'required',
+            'user_id'    => 'required|',
+            'name'      => 'required|min:5',
         ]);
 
-        //update group
+        //update Group
         $group->update([
-            'user_id'   => $request->user_id,
+            'user_id'    => $request->user_id,
             'name'      => $request->name
         ]);
+
 
         //redirect to index
         return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
-    public function delete(Group $group)
+    public function destroy(Group $group)
     {
         // Delete Data
         $group->delete();
