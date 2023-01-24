@@ -25,6 +25,12 @@
 
     <!-- Awal Data Table -->
     <div id="table" class="container">
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @endif
+
         <h1>
             <center>ACTIVE CLASS DATA
         </h1>
