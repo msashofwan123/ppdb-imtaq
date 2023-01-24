@@ -101,23 +101,9 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
           @csrf
         </form>
-
-
+        
       </div>
     </div>
-    <!-- <div class="btn-group">
-      <div class="dropdown">
-        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Hello, {{ Auth::user()->name }}
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Setting</a></li>
-          <li><a class="dropdown-item" href="#">Sign Out</a></li>
-        </ul>
-      </div>
-    </div> -->
-
   </header>
 
   <div class="container-fluid">
