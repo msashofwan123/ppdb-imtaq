@@ -49,6 +49,9 @@
             <thead>
                 <tr class="table-success">
                     <th scope="col">
+                        <center>Students
+                    </th>
+                    <th scope="col">
                         <center>ID
                     </th>
                     <th scope="col">
@@ -69,6 +72,7 @@
             <tbody>
                 @forelse($groups as $group)
                 <tr>
+                    <td><center><a href="" class="btn btn-sm btn-success">LIST</a></td>
                     <td>{{ $group->id }}</td>
                     <td>{{ $group->user_id }}</td>
                     <td>{{ $group->user_name; }}</td>
