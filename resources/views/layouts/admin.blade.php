@@ -145,6 +145,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('groups.index') }}">
+                <i class="fa-solid fa-bars"></i>
+                Class
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">
                 <i class="fa-solid fa-user"></i>
                 Presences
