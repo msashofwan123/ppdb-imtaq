@@ -75,9 +75,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        $selectedUserId = $group->user_id;
-        $group = Group::all();
-        return view('groups.edit', compact('group', 'selectedUserId'));
+        return view('groups.edit', compact('group'));
     }
 
     /**
@@ -91,13 +89,11 @@ class GroupController extends Controller
     {
         //validate form
         $request->validate([
-            'user_id'    => 'required|',
             'name'      => 'required|min:5',
         ]);
 
         //update Group
         $group->update([
-            'user_id'    => $request->user_id,
             'name'      => $request->name
         ]);
 

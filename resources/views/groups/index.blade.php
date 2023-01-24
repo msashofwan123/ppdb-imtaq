@@ -30,7 +30,7 @@
         </h1>
 
         <table class="table table-striped-columns">
-            <a href="{{ route('groups.create') }}" class="btn btn-md btn-success mb-3">ADD NEW</a>
+            <a href="{{ route('groups.create') }}" class="btn btn-md btn-success mb-3">ADD NEW ({{ Auth::user()->name }})</a>
             <thead>
                 <tr class="table-success">
                     <th scope="col">

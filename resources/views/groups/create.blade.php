@@ -38,6 +38,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">ID - Nama Dosen</label>
                                 <select type="number" class="form-control @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
+                                    <option>Pilih Dosen</option>
                                     @foreach($group as $user)
                                         <option value="{{ $user->id }}">{{ $user->id }}. {{ $user->name }}</option>
                                     @endforeach

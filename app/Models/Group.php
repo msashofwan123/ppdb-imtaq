@@ -18,9 +18,4 @@ class Group extends Model
         'user_id',
         'name',
     ];
-
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
 }

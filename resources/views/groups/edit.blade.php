@@ -35,26 +35,9 @@
 
                             @csrf
                             @method('put')
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">ID - Nama Dosen</label>
-                                <select type="number" class="form-control @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
-                                    @foreach($group as $user)
-                                        <option value="{{ $user->id }}">{{ $user->id }}. {{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                <!-- error message untuk user_id -->
-                                @error('user_id')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Kelas</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Kelas Programmer">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $group->name }}">
 
                                 <!-- error message untuk name -->
                                 @error('name')
@@ -63,7 +46,6 @@
                                 </div>
                                 @enderror
                             </div>
-
                             <br>
 
                             <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
