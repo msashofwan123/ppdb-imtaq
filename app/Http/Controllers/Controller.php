@@ -15,14 +15,5 @@ use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
-    public function index()
-    {
-
-        // Mengambil data dari tabel pendaftaran
-        $dataPendaftar = DB::table('pendaftaran')->get();
-    
-        // Mengirim Variable $datapendaftar berisi tabel ke index
-        return view('welcome', ['dataPendaftar' => $dataPendaftar]);
-    }
 }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -128,7 +129,7 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
-        /**
+    /**
      * destroy
      *
      * @param  mixed $student
@@ -137,7 +138,7 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //delete image
-        Storage::delete('public/students/'. $student->photo);
+        Storage::delete('public/students/' . $student->photo);
 
         //delete post
         $student->delete();
