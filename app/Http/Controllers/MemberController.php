@@ -13,16 +13,16 @@ class MemberController extends Controller
      * 
      * @return void
      */
-    public function index(Request $request)
-    {
-        $group_id = $request->query('group_id');
-        $members = DB::table('members')->where('group_id', $group_id)->get();
+    // public function index(Request $request)
+    // {
+    //     $group_id = $request->query('group_id');
+    //     $members = DB::table('members')->where('group_id', $group_id)->get();
 
 
-        // Render View with member
-        return view('members.index', compact('members'));
+    //     // Render View with member
+    //     return view('members.index', compact('members'));
 
-    }
+    // }
 
     // public function showData($id)
     // {

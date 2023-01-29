@@ -32,6 +32,15 @@ class GroupController extends Controller
         return view('groups.index', compact('groups'));
     }
 
+    public function show($id)
+    {
+        // $group_id = $request->query('group_id');
+        $members = DB::table('members')->where('group_id', $id)->get();
+
+        // Render View with member
+        return view('groups.show', compact('members'));
+    }
+
     /**
      * create
      *

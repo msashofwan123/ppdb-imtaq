@@ -72,7 +72,7 @@
             <tbody>
                 @forelse($groups as $group)
                 <tr>
-                    <td><center><a href="{{ url('members') }}?group_id={{ $group->id }}" class="btn btn-sm btn-success">LIST</a></td>
+                    <td><center><a href="{{ route('groups.show', $group->id) }}" class="btn btn-sm btn-success">LIST</a></td>
                     <td>{{ $group->id }}</td>
                     <td>{{ $group->user_id }}</td>
                     <td>{{ $group->user_name; }}</td>
