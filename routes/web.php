@@ -36,27 +36,14 @@ Route::get('/', [HomeController::class, 'index']);
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
 Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('students', StudentController::class);
-});
-
-Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
-Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('posts', PostController::class);
-});
-
-Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
-Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('groups', GroupController::class);
-});
-
-Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
-Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('members', MemberController::class);
 });
-
 
 // Route::resource('/posts', \App\Http\Controllers\PostController::class);
 // Route::resource('/students', \App\Http\Controllers\StudentController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/members/{id}', 'MembersController@index');
+Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'show'])->name('show');
