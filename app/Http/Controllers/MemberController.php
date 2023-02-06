@@ -24,9 +24,41 @@ class MemberController extends Controller
 
     // }
 
-    // public function showData($id)
-    // {
-    //     $members = DB::table('groups')->where('group_id', $id)->get();
-    //     return view('members.index', ['data' => $members]);
-    // }
+    /**
+     * create
+     *
+     * @return void
+     */
+    public function create()
+    {
+        $groups = DB::table('members')
+            ->join('', 'groups.id', '=', 'members.groups_id')
+            ->select('members.*', 'groups.name as group_name')
+            ->get();
+        return view('members.create');
+    }
+
+    /**
+     * store
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        //validate form
+        $request->validate([
+            'group_id'     => 'required',
+            'student_id'     => 'required',
+        ]);
+
+        //create post
+        Member::create([
+            'group_id'   => $request->group_id,
+            'student_id'      => $request->student_id
+        ]);
+
+        //redirect to index
+        return redirect()->route('groups.show')->with(['success' => 'Data Berhasil Disimpan!']);
+    }
 }
