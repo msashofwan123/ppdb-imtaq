@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Models\Schedule;
+use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SchedulesController extends Controller
 {
@@ -41,7 +43,11 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        return view('schedules.create');
+        $schedules = DB::table('groups')
+            ->join('users', 'users.group_id', '=', 'groups.id')
+            ->select('groups.*', 'users.*')
+            ->get();
+        return view('schedules.create', compact('schedule'));
     }
 
     /**

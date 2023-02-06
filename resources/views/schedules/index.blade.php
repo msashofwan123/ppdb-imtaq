@@ -29,14 +29,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Group Id</th><th>User Id</th><th>Note</th><th>Actions</th>
+                                        <th>#</th><th>Group Id</th><th>Group Name</th><th>User Id</th><th>User Name</th><th>Note</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($schedules as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->group_id }}</td><td>{{ $item->user_id }}</td><td>{{ $item->note }}</td>
+                                        <td>{{ $item->group_id }}</td><td>{{ $item->group->name }}</td><td>{{ $item->user_id }}</td><td>{{ $item->user->name }}</td><td>{{ $item->note }}</td>
                                         <td>
                                             <a href="{{ url('/schedules/' . $item->id) }}" title="View Schedule"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/schedules/' . $item->id . '/edit') }}" title="Edit Schedule"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
