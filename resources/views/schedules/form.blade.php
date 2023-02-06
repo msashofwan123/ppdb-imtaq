@@ -15,12 +15,12 @@
     <label for="user_id" class="control-label">{{ 'User Id' }}</label>
     <!-- <input class="form-control" name="user_id" type="number" id="user_id" value="{{ isset($schedule->user_id) ? $schedule->user_id : ''}}"> -->
 
-    <!-- <select class="form-control" name="user_id" id="user_id">
-        <option>PILIH Dosen</option>
+    <select class="form-control" name="user_id" id="user_id">
+        <option>PILIH USERS</option>
         @foreach ($schedule as $group)
-        <option value="{{ $group->id }}" {{ isset($schedule->group_id) && $schedule->group_id == $group->id ? 'selected' : '' }}>{{ $group->id }}. {{ $group->name }}</option>
+        <option value="{{ $group->users_id }}" {{ isset($schedule->group_id) && $schedule->group_id == $group->users_id ? 'selected' : '' }}>{{ $group->users_id }}. {{ $group->users_name }}</option>
         @endforeach
-    </select> -->
+    </select>
 
     {!! $errors->first('user_id', '<p class="help-block">:message</p>') !!}
 </div>

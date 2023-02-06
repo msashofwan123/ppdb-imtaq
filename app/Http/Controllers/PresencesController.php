@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Models\Schedule;
-use App\Models\Group;
+use App\Models\Presence;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class SchedulesController extends Controller
+class PresencesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,17 +21,17 @@ class SchedulesController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $schedules = Schedule::where('group_id', 'LIKE', "%$keyword%")
-                ->orWhere('user_id', 'LIKE', "%$keyword%")
+            $presences = Presence::where('schedule_id', 'LIKE', "%$keyword%")
+                ->orWhere('student_id', 'LIKE', "%$keyword%")
                 ->orWhere('note', 'LIKE', "%$keyword%")
-                ->orWhere('time_start_at', 'LIKE', "%$keyword%")
-                ->orWhere('time_end_at', 'LIKE', "%$keyword%")
+                ->orWhere('start_at', 'LIKE', "%$keyword%")
+                ->orWhere('end_at', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $schedules = Schedule::latest()->paginate($perPage);
+            $presences = Presence::latest()->paginate($perPage);
         }
 
-        return view('schedules.index', compact('schedules'));
+        return view('presences.index', compact('presences'));
     }
 
     /**
@@ -43,11 +41,7 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $schedule = DB::table('groups')
-            ->join('users', 'users.id', '=', 'groups.user_id')
-            ->select('groups.*', 'users.id as users_id', 'users.name as users_name')
-            ->get();
-        return view('schedules.create', compact('schedule'));
+        return view('presences.create');
     }
 
     /**
@@ -62,9 +56,9 @@ class SchedulesController extends Controller
         
         $requestData = $request->all();
         
-        Schedule::create($requestData);
+        Presence::create($requestData);
 
-        return redirect('schedules')->with('flash_message', 'Schedule added!');
+        return redirect('presences')->with('flash_message', 'Presence added!');
     }
 
     /**
@@ -76,9 +70,9 @@ class SchedulesController extends Controller
      */
     public function show($id)
     {
-        $schedule = Schedule::findOrFail($id);
+        $presence = Presence::findOrFail($id);
 
-        return view('schedules.show', compact('schedule'));
+        return view('presences.show', compact('presence'));
     }
 
     /**
@@ -90,9 +84,9 @@ class SchedulesController extends Controller
      */
     public function edit($id)
     {
-        $schedule = Schedule::findOrFail($id);
+        $presence = Presence::findOrFail($id);
 
-        return view('schedules.edit', compact('schedule'));
+        return view('presences.edit', compact('presence'));
     }
 
     /**
@@ -108,10 +102,10 @@ class SchedulesController extends Controller
         
         $requestData = $request->all();
         
-        $schedule = Schedule::findOrFail($id);
-        $schedule->update($requestData);
+        $presence = Presence::findOrFail($id);
+        $presence->update($requestData);
 
-        return redirect('schedules')->with('flash_message', 'Schedule updated!');
+        return redirect('presences')->with('flash_message', 'Presence updated!');
     }
 
     /**
@@ -123,8 +117,8 @@ class SchedulesController extends Controller
      */
     public function destroy($id)
     {
-        Schedule::destroy($id);
+        Presence::destroy($id);
 
-        return redirect('schedules')->with('flash_message', 'Schedule deleted!');
+        return redirect('presences')->with('flash_message', 'Presence deleted!');
     }
 }

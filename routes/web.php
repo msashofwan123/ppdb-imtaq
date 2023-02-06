@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\PresencesController;
 // use App\Http\Controllers\Auth;
 // use App\Http\Controllers\Controller;
 
@@ -51,3 +52,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('schedules', SchedulesController::class);
+Route::resource('presences', PresencesController::class);
