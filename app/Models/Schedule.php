@@ -25,7 +25,7 @@ class Schedule extends Model
      *
      * @var array
      */
-    protected $fillable = ['group_id', 'user_id', 'note', 'time_start_at', 'time_end_at'];
+    protected $fillable = ['group_id', 'user_id', 'presence', 'note', 'time_start_at', 'time_end_at'];
 
     public function group()
     {

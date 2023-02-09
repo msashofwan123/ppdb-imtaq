@@ -12,7 +12,7 @@
     {!! $errors->first('group_id', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('user_id') ? 'has-error' : ''}}">
-    <label for="user_id" class="control-label">{{ 'User Id' }}</label>
+    <label for="user_id" class="control-label">{{ 'User Id - Name' }}</label>
     <!-- <input class="form-control" name="user_id" type="number" id="user_id" value="{{ isset($schedule->user_id) ? $schedule->user_id : ''}}"> -->
 
     <select class="form-control" name="user_id" id="user_id">

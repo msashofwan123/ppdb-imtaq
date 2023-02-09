@@ -26,6 +26,7 @@ class SchedulesController extends Controller
             $schedules = Schedule::where('group_id', 'LIKE', "%$keyword%")
                 ->orWhere('user_id', 'LIKE', "%$keyword%")
                 ->orWhere('note', 'LIKE', "%$keyword%")
+                ->orWhere('presence', 'LIKE', "%$keyword%")
                 ->orWhere('time_start_at', 'LIKE', "%$keyword%")
                 ->orWhere('time_end_at', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);

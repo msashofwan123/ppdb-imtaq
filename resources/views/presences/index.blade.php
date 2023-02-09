@@ -28,14 +28,14 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Schedule Id</th><th>Student Id</th><th>Note</th><th>Actions</th>
+                                        <th>#</th><th>Schedule Id</th><th>Student Id</th><th>Presence</th><th>Note</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($presences as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->schedule_id }}</td><td>{{ $item->student_id }}</td><td>{{ $item->note }}</td>
+                                        <td>{{ $item->schedule_id }}</td><td>{{ $item->student_id }}</td><td>{{ $item->presence }}</td><td>{{ $item->note }}</td>
                                         <td>
                                             <a href="{{ url('/presences/' . $item->id) }}" title="View Presence"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/presences/' . $item->id . '/edit') }}" title="Edit Presence"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

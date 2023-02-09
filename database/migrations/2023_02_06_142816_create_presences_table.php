@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePresencesTable extends Migration
 {
@@ -17,6 +18,7 @@ class CreatePresencesTable extends Migration
             $table->timestamps();
             $table->bigInteger('schedule_id')->unsigned();
             $table->bigInteger('student_id')->unsigned();
+            $table->string('presence')->nullable();
             $table->string('note')->nullable();
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
