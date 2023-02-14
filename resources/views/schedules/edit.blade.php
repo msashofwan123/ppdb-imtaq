@@ -32,7 +32,7 @@
             <div class="col-lg-10">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <form action="{{ route('schedules.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('schedules.update', $schedules->id) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
                             <div class="form-group">
