@@ -60,6 +60,8 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        
+
         //validate form
         $request->validate([
             'user_id'     => 'required',

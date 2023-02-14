@@ -40,7 +40,6 @@ Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('students', StudentController::class);
     Route::resource('posts', PostController::class);
     Route::resource('groups', GroupController::class);
-    Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'show'])->name('show');
     Route::resource('members', MemberController::class);
 });
 
@@ -49,7 +48,3 @@ Route::middleware(['auth', 'user-access'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::resource('schedules', SchedulesController::class);
-Route::resource('presences', PresencesController::class);
