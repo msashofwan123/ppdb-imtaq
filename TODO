@@ -1,13 +1,13 @@
-☐ Delete File Schedule dan Presences
-    ☐ Delete Migration
-    ☐ Delete Controller
-    ☐ Delete Public View
+✔ Delete File Schedule dan Presences @done(23-02-14 08:36)
+    ✔ Delete Migration @done(23-02-14 08:36)
+    ✔ Delete Controller @done(23-02-14 08:36)
+    ✔ Delete Public View @done(23-02-14 08:36)
 
-☐ Membuat Fitur Schedules
-    ☐ Fitur Create
-    ☐ Fitur Read
-    ☐ Fitur Edit
-    ☐ Fitur Delete
+☐ Membuat Fitur Schedules @started(23-02-14 08:36)
+    ✔ Fitur Create @done(23-02-14 15:05)
+    ✔ Fitur Read @done(23-02-14 15:05)
+    ✔ Fitur Edit @done(23-02-14 17:28)
+    ✔ Fitur Delete @done(23-02-14 17:30)
 
 ☐ Membuat Fitur Presences
     ☐ Fitur Create

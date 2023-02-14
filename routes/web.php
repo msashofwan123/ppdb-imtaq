@@ -8,7 +8,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PresencesController;
 // use App\Http\Controllers\Auth;
 // use App\Http\Controllers\Controller;
@@ -48,3 +48,5 @@ Route::middleware(['auth', 'user-access'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('schedules', ScheduleController::class);

@@ -142,7 +142,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('presences.index') }}">
+              <a class="nav-link" href="">
                 <i class="fa-solid fa-user"></i>
                 Presences
               </a>
