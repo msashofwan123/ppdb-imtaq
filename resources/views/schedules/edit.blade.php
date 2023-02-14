@@ -35,6 +35,8 @@
                         <form action="{{ route('schedules.update', $schedules->id) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
+                            @method('put')
+
                             <div class="form-group">
                                 <label class="font-weight-bold">Group Id</label>
                                 <!-- <input type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" value="{{ old('group_id') }}" placeholder="#"> -->

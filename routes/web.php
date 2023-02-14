@@ -9,7 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\PresencesController;
+use App\Http\Controllers\PresenceController;
 // use App\Http\Controllers\Auth;
 // use App\Http\Controllers\Controller;
 
@@ -41,6 +41,8 @@ Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::resource('groups', GroupController::class);
     Route::resource('members', MemberController::class);
+    Route::resource('schedules', ScheduleController::class);
+    Route::resource('presences', PresenceController::class);
 });
 
 // Route::resource('/posts', \App\Http\Controllers\PostController::class);
@@ -48,5 +50,3 @@ Route::middleware(['auth', 'user-access'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('schedules', ScheduleController::class);
