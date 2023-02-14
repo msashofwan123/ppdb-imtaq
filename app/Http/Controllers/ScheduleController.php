@@ -25,7 +25,7 @@ class ScheduleController extends Controller
         return view('schedules.index', compact('schedules'));
     }
 
-        /**
+    /**
      * create
      *
      * @return void
@@ -40,7 +40,7 @@ class ScheduleController extends Controller
 
     public function store(Request $request)
     {
-        
+
 
         //validate form
         $request->validate([
@@ -64,7 +64,7 @@ class ScheduleController extends Controller
         return redirect()->route('schedules.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
-        /**
+    /**
      * edit
      * 
      * @param  mixed $schedule
@@ -75,13 +75,13 @@ class ScheduleController extends Controller
         $schedules = Schedule::find($id);
         $group = Group::All();
         $user = User::All();
-        $selectedGroupId = DB::table('schedules') ->select('group_id') ->where('id', $id) ->value('group_id');
-        $selectedUserId = DB::table('schedules') ->select('user_id') ->where('id', $id) ->value('user_id');
+        $selectedGroupId = DB::table('schedules')->select('group_id')->where('id', $id)->value('group_id');
+        $selectedUserId = DB::table('schedules')->select('user_id')->where('id', $id)->value('user_id');
 
         return view('schedules.edit', compact('schedules', 'group', 'user', 'selectedGroupId', 'selectedUserId'));
     }
 
-    
+
     /**
      * update
      *
