@@ -36,9 +36,11 @@ class GroupController extends Controller
     {
         // $group_id = $request->query('group_id');
         $members = DB::table('members')->where('group_id', $id)->get();
+        // $NewId = DB::table('members')->where('group_id', $id)->first();
+        // $membersId = $NewId->group_id;
 
         // Render View with member
-        return view('groups.show', compact('members'));
+        return view('groups.show', compact('members', 'id'));
     }
 
     /**

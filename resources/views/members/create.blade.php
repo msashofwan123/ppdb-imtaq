@@ -27,14 +27,9 @@
 
                             @csrf
                             <div class="form-group">
-                                <label class="font-weight-bold">ID Kelas</label>
-                                <select type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" id="group_id">
-                                    <option>Pilih Kelas</option>
-                                    @foreach($members as $data)
-                                        <option value="{{ $data->id }}">{{ $data->id }}. {{ $data->name }}</option>
-                                    @endforeach
-                                </select>
-
+                                <label class="font-weight-bold">Group Id</label>
+                                <input type="number" readonly class="form-control @error('group_id') is-invalid @enderror" name="group_id" id="group_id" value="{{ $id }}">
+                                <small>This field is filled in automatically by the system</small>
                                 <!-- error message untuk group_id -->
                                 @error('group_id')
                                 <div class="alert alert-danger mt-2">
@@ -42,20 +37,28 @@
                                 </div>
                                 @enderror
                             </div>
+                            <br>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Nama Kelas</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Kelas Programmer">
+                                <label class="font-weight-bold">Student Id</label>
+                                <!-- <input type="number" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" placeholder="#"> -->
 
-                                <!-- error message untuk name -->
-                                @error('name')
+                                <select type="text" class="form-control  @error('student_id') is-invalid @enderror" name="student_id" id="student_id">
+                                    <option value="">Pilih Student</option>
+                                    @foreach ($student as $item)
+                                    <option value="{{ $item->id }}">{{ $item->id }}. {{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                <!-- error message untuk student_id -->
+                                @error('student_id')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-md btn-primary">SUMBIT</button>
+                            <button type="submit" class="btn btn-md btn-primary">SUBMIT</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
 
                         </form>
@@ -66,12 +69,6 @@
         </div>
     </div>
 
-
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
 
 </body>

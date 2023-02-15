@@ -50,3 +50,5 @@ Route::middleware(['auth', 'user-access'])->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/members/{id}/create', [MemberController::class, 'create'])->name('members.create');

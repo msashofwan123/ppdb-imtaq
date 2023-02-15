@@ -29,13 +29,20 @@ class MemberController extends Controller
      *
      * @return void
      */
-    public function create()
+    public function create($id)
     {
-        $groups = DB::table('members')
-            ->join('', 'groups.id', '=', 'members.groups_id')
-            ->select('members.*', 'groups.name as group_name')
+        // $members = DB::table('members')
+        //     ->join('', 'groups.id', '=', 'members.groups_id')
+        //     ->select('members.*', 'groups.name as group_name')
+        //     ->get();
+
+        $members = Member::All();
+        $student = DB::table('students')
+            ->select('students.id', 'students.name')
             ->get();
-        return view('members.create');
+        
+        return view('members.create', compact('members','id','student'));
+        // return view('members.create', ['id' => $id, 'members' => $members]);
     }
 
     /**
@@ -47,7 +54,7 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         //validate form
-        $request->validate([
+        $data = $request->validate([
             'group_id'     => 'required',
             'student_id'     => 'required',
         ]);
@@ -58,7 +65,9 @@ class MemberController extends Controller
             'student_id'      => $request->student_id
         ]);
 
+        $groupId = $data['group_id'];
+
         //redirect to index
-        return redirect()->route('groups.show')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('groups.show', $groupId )->with(['success' => 'Data Berhasil Disimpan!']);
     }
 }
