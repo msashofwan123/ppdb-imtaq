@@ -63,7 +63,7 @@
 
                     <tbody>
 
-                        @foreach ($presence as $item)
+                        @forelse ($presence as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->student_id }}</td>
@@ -98,7 +98,13 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+
+                        @empty
+                        <div class="alert alert-danger">
+                            <center>DATA NOT FOUND</center>
+                        </div>
+
+                        @endforelse
                     </tbody>
                 </table>
             </div>
