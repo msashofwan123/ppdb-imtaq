@@ -88,7 +88,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> DELETE</button>
-                            <a href="" class="btn btn-sm btn-success"><i class="fa fa-list-ul"></i> Attendance</a>
+                            <a href="{{ route('presences.show', $item->id) }}" class="btn btn-sm btn-success"><i class="fa fa-list-ul"></i> Attendance</a>
                         </form>
                     </td>
                 </tr>

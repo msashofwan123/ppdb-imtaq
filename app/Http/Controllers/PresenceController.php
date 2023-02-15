@@ -25,6 +25,25 @@ class PresenceController extends Controller
         return view('presences.index', compact('presences'));
     }
 
+    public function show($id)
+    {
+        $schedule = Schedule::find($id);
+        // $scheduleId = $schedule->id;
+        $result = DB::table('schedules')
+            ->join('groups', 'schedules.group_id', '=', 'groups.id')
+            ->join('users', 'schedules.user_id', '=', 'users.id')
+            ->select('schedules.*', 'groups.name as group_name', 'users.name as user_name')
+            ->where('schedules.id', $id)
+            ->first();
+        
+        $group_id = $result->group_id;    
+        $count = DB::table('members')->where('group_id', $group_id)->count();
+
+        $presence = DB::table('members') ->select('members.*') ->where('group_id', $group_id) ->get();
+
+        return view('presences.action', compact('schedule', 'result', 'count', 'presence'));
+    }
+
     /**
      * create
      *

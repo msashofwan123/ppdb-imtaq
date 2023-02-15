@@ -15,4 +15,12 @@
     ✔ Fitur Edit @done(23-02-14 21:40)
     ✔ Fitur Delete @done(23-02-14 21:40)
 
-☐ Membuat Tampilan Form Absensi IDBC
+✔ Membuat Tampilan Form Absensi IDBC @started(23-02-14 22:09) @done(23-02-15 07:25) @lasted(9h16m35s)
+    ✔ Schedule Id @done(23-02-14 22:14)
+    ✔ Name Group @done(23-02-14 22:32)
+    ✔ Name User @done(23-02-14 22:32)
+    ✔ Jumlah Siswa dalam Grup @done(23-02-14 22:46)
+    ✔ Note (Opsional) @done(23-02-14 22:46)
+    ✔ Schedule Time Start - Time End @done(23-02-14 22:46)
+    ✔ URL /1/action (Menjadikan Id Parameter) @done(23-02-14 22:46)
+    ✔ @foreach Siswa yang berada dalam grup itu @done(23-02-15 07:25)

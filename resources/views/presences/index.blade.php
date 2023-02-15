@@ -36,8 +36,7 @@
         </h1>
 
         <table class="table table-striped-columns">
-            <a href="{{ route('presences.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus-circle
-"></i> ADD NEW ({{ Auth::user()->name }})</a>
+            <a href="{{ route('presences.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus-circle"></i> ADD NEW ({{ Auth::user()->name }})</a>
             <thead>
                 <tr class="table-success">
                     <th scope="col">
@@ -92,25 +91,7 @@
 
         </div>
     </div>
-
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
-    <!-- <script>
-        //message with toastr
-        @if(session()->has('success'))
-        
-            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
-
-        @elseif(session()->has('error'))
-
-            toastr.error('{{ session('error') }}', 'GAGAL!'); 
-            
-        @endif
-    </script> -->
 </body>
 
 
