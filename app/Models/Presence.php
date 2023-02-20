@@ -17,7 +17,7 @@ class Presence extends Model
     protected $fillable = [
         'schedule_id',
         'student_id',
-        'group_id',
+        // 'group_id',
         'presence',
         'note',
     ];

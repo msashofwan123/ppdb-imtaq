@@ -1,0 +1,12 @@
+Modal :
+1. Skill & Experience
+2. Modal Source Code, Hosting, Domain
+
+Faktor Penentu Harga :
+1. Level Dari Client (Perusahaan, UMKM)
+2. Level Support
+    a. Jual Putus (Untuk Software)
+        -- Namun tetap Pengambilan biaya untu Hosting dan Domain
+    b. Berlangganan (Software As A Service)
+        -- Web Akuntansi Online
+        -- Web Manajemen Sekolah Online

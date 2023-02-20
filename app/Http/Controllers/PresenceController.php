@@ -19,7 +19,7 @@ class PresenceController extends Controller
     public function index()
     {
         //get presences
-        $presences = Presence::latest()->paginate(5);
+        $presences = Presence::latest()->paginate(20);
 
         //render view with presences
         return view('presences.index', compact('presences'));
@@ -35,11 +35,11 @@ class PresenceController extends Controller
             ->select('schedules.*', 'groups.name as group_name', 'users.name as user_name')
             ->where('schedules.id', $id)
             ->first();
-        
-        $group_id = $result->group_id;    
+
+        $group_id = $result->group_id;
         $count = DB::table('members')->where('group_id', $group_id)->count();
 
-        $presence = DB::table('members') ->select('members.*') ->where('group_id', $group_id) ->get();
+        $presence = DB::table('members')->select('members.*')->where('group_id', $group_id)->get();
 
         return view('presences.action', compact('schedule', 'result', 'count', 'presence'));
     }
@@ -57,29 +57,77 @@ class PresenceController extends Controller
         return view('presences.create', compact('presence', 'schedule', 'student'));
     }
 
+    // public function store(Request $request)
+    // {
+
+
+    //     //validate form
+    //     $request->validate([
+    //         'schedule_id'     => 'required',
+    //         'student_id'     => 'required',
+    //         'presence'     => 'required',
+    //         'note'     => 'required'
+    //     ]);
+
+    //     //create post
+    //     Presence::create([
+    //         'schedule_id'   => $request->schedule_id,
+    //         'student_id'   => $request->student_id,
+    //         'presence'      => $request->presence,
+    //         'note'  => $request->note,
+    //     ]);
+
+    //     //redirect to index
+    //     return redirect()->route('presences.index')->with(['success' => 'Data Berhasil Disimpan!']);
+    // }
+
     public function store(Request $request)
     {
+        $presences = Presence::All();
+        $SendData = $request->input('items');
 
-
-        //validate form
+        
+        
         $request->validate([
-            'schedule_id'     => 'required',
-            'student_id'     => 'required',
-            'presence'     => 'required',
-            'note'     => 'required'
+            'items' => 'required|array',
+            'items.*.schedule_id' => 'required|numeric',
+            'items.*.student_id' => 'required|numeric',
+            'items.*.presence' => 'required',
+            'items.*.note' => 'nullable'
         ]);
 
-        //create post
-        Presence::create([
-            'schedule_id'   => $request->schedule_id,
-            'student_id'   => $request->student_id,
-            'presence'      => $request->presence,
-            'note'  => $request->note,
-        ]);
 
-        //redirect to index
-        return redirect()->route('presences.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        foreach ($SendData as $itemdata) {
+
+            // \Log::info($itemdata['schedule_id']);
+            // \Log::info($itemdata['student_id']);
+            // \Log::info($itemdata['presence']);
+            // \Log::info($itemdata['note']);
+
+            // Presence::create([
+            //     'schedule_id' => $itemdata['schedule_id'],
+            //     'student_id' => $itemdata['student_id'],
+            //     'presence' => $itemdata['presence'],
+            //     'note' => $itemdata['note']
+            // ]);
+
+            $item = new Presence();
+            $item->schedule_id = $itemdata['schedule_id'];
+            $item->student_id = $itemdata['student_id'];
+            $item->presence = $itemdata['presence'];
+            $item->note = $itemdata['note'];
+            $item->saveOrFail();
+
+        
+            // echo var_dump($itemdata);
+            // die();
+            
+
+        }
+
+        return view('presences.index', compact('presences'))->with('success', 'Data berhasil disimpan.');
     }
+
 
     /**
      * edit

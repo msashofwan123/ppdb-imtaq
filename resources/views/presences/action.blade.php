@@ -51,66 +51,80 @@
         <div class="row">
 
             <div class="col-lg-10">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Presence</th>
-                            <th>Note</th>
-                        </tr>
-                    </thead>
+                <form action="{{ route('presences.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Presence</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
 
-                        @forelse ($presence as $item)
-                        <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->student_id }}</td>
-                            <td>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence1" value="Hadir">
-                                    <label class="form-check-label" for="presence1">Hadir</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence2" value="Sakit">
-                                    <label class="form-check-label" for="presence2">Sakit</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence3" value="Izin">
-                                    <label class="form-check-label" for="presence3">Izin</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence3" value="Alfa">
-                                    <label class="form-check-label" for="presence3">Alfa</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control @error('note') is-invalid @enderror" name="note" value="{{ old('note') }}">
-
-                                    <!-- error message untuk note -->
-                                    @error('note')
+                            @forelse ($presence as $item)
+                            <tr>
+                                <td>1</td>
+                                <input type="hidden" name="items[{{ $item->id }}][schedule_id]" value="{{ $schedule->id }}">
+                                <td>{{ $item->student_id }}</td>
+                                <input type="hidden" name="items[{{ $item->id }}][student_id]" value="{{ $item->student_id }}">
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence1" value="Hadir">
+                                        <label class="form-check-label" for="presence1">Hadir</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence2" value="Sakit">
+                                        <label class="form-check-label" for="presence2">Sakit</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Izin">
+                                        <label class="form-check-label" for="presence3">Izin</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Alfa">
+                                        <label class="form-check-label" for="presence3">Alfa</label>
+                                    </div>
+                                    <!-- error message untuk presence -->
+                                    @error('presence')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                     @enderror
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control @error('note') is-invalid @enderror" name="items[{{ $item->id }}][note]">
 
-                        @empty
-                        <div class="alert alert-danger">
-                            <center>DATA NOT FOUND</center>
-                        </div>
+                                        <!-- error message untuk note -->
+                                        @error('note')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </td>
+                            </tr>
 
-                        @endforelse
-                    </tbody>
-                </table>
+                            @empty
+                            <div class="alert alert-danger">
+                                <center>DATA NOT FOUND</center>
+                            </div>
+
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-md btn-success"><i class="fa fa-cogs"></i> SUBMIT</button>
+                    <button type="reset" class="btn btn-md btn-warning"><i class="fa fa-refresh"></i> RESET</button>
+                </form>
             </div>
 
         </div>
     </div>
 </body>
+
 
 @stop
