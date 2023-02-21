@@ -45,7 +45,7 @@
         </h1>
 
         <table class="table table-striped-columns">
-            <a href="{{ route('schedules.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus-circle
+            <a href="{{ route('schedules.create') }}" title="Add Schedule" class="btn btn-md btn-success mb-3"><i class="fa fa-plus-circle
 "></i> ADD NEW ({{ Auth::user()->name }})</a>
             <thead>
                 <tr class="table-success">
@@ -84,11 +84,11 @@
                     <td>{{ $item->time_end_at }}</td>
                     <td class="text-center">
                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('schedules.destroy', $item->id) }}" method="POST">
-                            <a href="{{ route('schedules.edit', $item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> EDIT</a>
+                            <a href="{{ route('schedules.edit', $item->id) }}" title="Edit Schedule" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> EDIT</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> DELETE</button>
-                            <a href="{{ route('presences.show', $item->id) }}" class="btn btn-sm btn-success"><i class="fa fa-list-ul"></i> Attendance</a>
+                            <button type="submit" class="btn btn-sm btn-danger" title="Edit Data"><i class="fa fa-trash"></i> DELETE</button>
+                            <a href="{{ route('presences.show', $item->id) }}" title="Attendance" class="btn btn-sm btn-success"><i class="fa fa-list-ul"></i> Attendance</a>
                         </form>
                     </td>
                 </tr>
