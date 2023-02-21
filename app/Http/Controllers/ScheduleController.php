@@ -20,9 +20,14 @@ class ScheduleController extends Controller
     {
         //get posts
         $schedules = Schedule::latest()->paginate(5);
+        $join = DB::table('schedules')
+        ->join('groups', 'groups.id', '=', 'schedules.group_id')
+        ->join('users', 'users.id', '=', 'schedules.user_id')
+        ->select('schedules.*', 'groups.name as group_name', 'users.name as user_name')
+        ->get();
 
         //render view with posts
-        return view('schedules.index', compact('schedules'));
+        return view('schedules.index', compact('schedules','join'));
     }
 
     /**

@@ -74,11 +74,11 @@
             </thead>
 
             <tbody>
-                @forelse($schedules as $item)
+                @forelse($join as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->group_id }}</td>
-                    <td>{{ $item->user_id }}</td>
+                    <td>{{ $item->group_id }} - {{ $item->group_name }}</td>
+                    <td>{{ $item->user_id }} - {{ $item->user_name }}</td>
                     <td>{{ $item->note }}</td>
                     <td>{{ $item->time_start_at }}</td>
                     <td>{{ $item->time_end_at }}</td>
