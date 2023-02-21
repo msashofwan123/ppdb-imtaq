@@ -89,25 +89,35 @@ class ScheduleController extends Controller
      * @param  mixed $schedules
      * @return void
      */
-    public function update(Request $request, Schedule $schedules)
+    public function update(Request $request, $id)
     {
+        // echo var_dump($schedules);
+        // die();
         //validate form
-        $request->validate([
-            'group_id'     => 'required',
-            'user_id'     => 'required',
-            'note'     => 'required',
-            'time_start_at'     => 'required',
-            'time_end_at'     => 'required',
-        ]);
+        // $request->validate([
+        //     'group_id'     => 'required',
+        //     'user_id'     => 'required',
+        //     'note'     => 'required',
+        //     'time_start_at'     => 'required',
+        //     'time_end_at'     => 'required',
+        // ]);
+        // $schedules = Schedule::findOrFail($schedules->id);
+        // echo var_dump($schedules);
+        // die();
 
         //update Group
-        $schedules->update([
-            'group_id'   => $request->group_id,
-            'user_id'   => $request->user_id,
-            'note'      => $request->note,
-            'time_start_at'  => $request->time_start_at,
-            'time_end_at'  => $request->time_end_at
-        ]);
+        // $schedules->update([
+        //     'group_id'   => $request->group_id,
+        //     'user_id'   => $request->user_id,
+        //     'note'      => $request->note,
+        //     'time_start_at'  => $request->time_start_at,
+        //     'time_end_at'  => $request->time_end_at
+        // ]);
+        $requestData = $request->all();
+        
+        $schedule = Schedule::findOrFail($id);
+        $schedule->update($requestData);
+
 
 
         //redirect to index
