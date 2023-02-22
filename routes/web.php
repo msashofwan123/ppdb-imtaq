@@ -10,9 +10,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PresenceController;
-// use App\Http\Controllers\Auth;
-// use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,6 +41,7 @@ Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('members', MemberController::class);
     Route::resource('schedules', ScheduleController::class);
     Route::resource('presences', PresenceController::class);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 });
 
 // Route::resource('/posts', \App\Http\Controllers\PostController::class);

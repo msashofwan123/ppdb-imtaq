@@ -112,7 +112,7 @@
         <div class="position-sticky pt-3 sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
+              <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">
                 <i class="fa-solid fa-gauge"></i>
                 Dashboard
               </a>
