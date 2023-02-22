@@ -14,15 +14,6 @@
 
 <body>
 
-    <main>
-        <!-- Awal Header -->
-        <?php
-        // include("style/header.php");
-        ?>
-        <!-- Akhir Header -->
-
-    </main>
-
     <!-- Awal Data Table -->
     <div id="table" class="container">
         @if(session()->has('success'))

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Presence;
 use App\Models\Student;
 use App\Models\Schedule;
+use App\Models\Member;
 use Illuminate\Support\Facades\DB;
-
 
 class PresenceController extends Controller
 {
@@ -26,23 +26,18 @@ class PresenceController extends Controller
     }
 
     public function show($id)
-    {
-        $schedule = Schedule::find($id);
-        // $scheduleId = $schedule->id;
-        $result = DB::table('schedules')
-            ->join('groups', 'schedules.group_id', '=', 'groups.id')
-            ->join('users', 'schedules.user_id', '=', 'users.id')
-            ->select('schedules.*', 'groups.name as group_name', 'users.name as user_name')
-            ->where('schedules.id', $id)
-            ->first();
-
-        $group_id = $result->group_id;
-        $count = DB::table('members')->where('group_id', $group_id)->count();
-
-        $presence = DB::table('members')->select('members.*')->where('group_id', $group_id)->get();
-
-        return view('presences.action', compact('schedule', 'result', 'count', 'presence'));
-    }
+{
+    $schedule = Schedule::find($id);
+    $result = DB::table('schedules')
+        ->join('groups', 'schedules.group_id', '=', 'groups.id')
+        ->join('users', 'schedules.user_id', '=', 'users.id')
+        ->select('schedules.*', 'groups.name as group_name', 'users.name as user_name')
+        ->where('schedules.id', $id)
+        ->first();
+    $count = Member::where('group_id', $result->group_id)->count();
+    $presence = Member::where('group_id', $result->group_id)->get();
+    return view('presences.action', compact('schedule', 'result', 'count', 'presence'));
+}
 
     /**
      * create
@@ -57,37 +52,11 @@ class PresenceController extends Controller
         return view('presences.create', compact('presence', 'schedule', 'student'));
     }
 
-    // public function store(Request $request)
-    // {
-
-
-    //     //validate form
-    //     $request->validate([
-    //         'schedule_id'     => 'required',
-    //         'student_id'     => 'required',
-    //         'presence'     => 'required',
-    //         'note'     => 'required'
-    //     ]);
-
-    //     //create post
-    //     Presence::create([
-    //         'schedule_id'   => $request->schedule_id,
-    //         'student_id'   => $request->student_id,
-    //         'presence'      => $request->presence,
-    //         'note'  => $request->note,
-    //     ]);
-
-    //     //redirect to index
-    //     return redirect()->route('presences.index')->with(['success' => 'Data Berhasil Disimpan!']);
-    // }
-
     public function store(Request $request)
     {
         $presences = Presence::All();
         $SendData = $request->input('items');
 
-        
-        
         $request->validate([
             'items' => 'required|array',
             'items.*.schedule_id' => 'required|numeric',
@@ -96,20 +65,9 @@ class PresenceController extends Controller
             'items.*.note' => 'nullable'
         ]);
 
-
         foreach ($SendData as $itemdata) {
 
             // \Log::info($itemdata['schedule_id']);
-            // \Log::info($itemdata['student_id']);
-            // \Log::info($itemdata['presence']);
-            // \Log::info($itemdata['note']);
-
-            // Presence::create([
-            //     'schedule_id' => $itemdata['schedule_id'],
-            //     'student_id' => $itemdata['student_id'],
-            //     'presence' => $itemdata['presence'],
-            //     'note' => $itemdata['note']
-            // ]);
 
             $item = new Presence();
             $item->schedule_id = $itemdata['schedule_id'];
@@ -118,16 +76,12 @@ class PresenceController extends Controller
             $item->note = $itemdata['note'];
             $item->saveOrFail();
 
-        
             // echo var_dump($itemdata);
             // die();
-            
-
         }
 
         return view('presences.index', compact('presences'))->with('success', 'Data berhasil disimpan.');
     }
-
 
     /**
      * edit
@@ -138,14 +92,12 @@ class PresenceController extends Controller
     public function edit($id)
     {
         $presence = Presence::find($id);
-        $schedule = Schedule::All();
-        $student = Student::All();
-
-        $selectedScheduleId = DB::table('presences')->select('schedule_id')->where('id', $id)->value('schedule_id');
-        $selectedStudentId = DB::table('presences')->select('student_id')->where('id', $id)->value('student_id');
-        return view('presences.edit', compact('presence', 'schedule', 'student', 'selectedScheduleId', 'selectedStudentId'));
+        $schedule = Schedule::all();
+        $student = Student::all();
+        $selectedIds = DB::table('presences')->select('schedule_id', 'student_id')->where('id', $id)->first();
+        return view('presences.edit', compact('presence', 'schedule', 'student', 'selectedIds'));
     }
-
+    
     /**
      * update
      *
@@ -170,7 +122,6 @@ class PresenceController extends Controller
             'presence'      => $request->presence,
             'note'  => $request->note
         ]);
-
 
         //redirect to index
         return redirect()->route('presences.index')->with(['success' => 'Data Berhasil Diubah!']);

@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class GroupController extends Controller
 {
     /**
@@ -20,9 +19,6 @@ class GroupController extends Controller
         //get groups
 
         // $groups = Group::latest()->paginate(5);
-        // $groups = Group::with('users')->get();
-
-
         $groups = DB::table('groups')
             ->join('users', 'users.id', '=', 'groups.user_id')
             ->select('groups.*', 'users.name as user_name')
@@ -34,13 +30,28 @@ class GroupController extends Controller
 
     public function show($id)
     {
-        // $group_id = $request->query('group_id');
-        $members = DB::table('members')->where('group_id', $id)->get();
-        // $NewId = DB::table('members')->where('group_id', $id)->first();
-        // $membersId = $NewId->group_id;
+        $groups = DB::table('groups')
+            ->select('name', 'id')
+            ->where('id', $id)
+            ->first();
 
-        // Render View with member
-        return view('groups.show', compact('members', 'id'));
+        $users = DB::table('groups')
+            ->join('users', 'users.id', '=', 'groups.user_id')
+            ->select('users.name', 'users.id')
+            ->where('groups.id', $id)
+            ->first();
+
+        $count = DB::table('members')
+            ->where('group_id', $id)
+            ->count();
+
+        $members = DB::table('members')
+            ->join('students', 'students.id', '=', 'members.student_id')
+            ->select('members.*', 'students.name as student_name')
+            ->where('group_id', $id)
+            ->get();
+
+        return view('groups.show', compact('members', 'groups', 'users', 'count'));
     }
 
     /**
@@ -62,7 +73,6 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        
 
         //validate form
         $request->validate([
@@ -113,7 +123,6 @@ class GroupController extends Controller
         $group->update([
             'name'      => $request->name
         ]);
-
 
         //redirect to index
         return redirect()->route('groups.index')->with(['success' => 'Data Berhasil Diubah!']);

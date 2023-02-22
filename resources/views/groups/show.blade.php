@@ -14,15 +14,6 @@
 
 <body>
 
-    <main>
-        <!-- Awal Header -->
-        <?php
-        // include("style/header.php");
-        ?>
-        <!-- Akhir Header -->
-
-    </main>
-
     <!-- Awal Data Table -->
     <div id="table" class="container">
         @if(session()->has('success'))
@@ -43,19 +34,38 @@
         <h1>
             <center>ACTIVE MEMBERS DATA
         </h1>
+        <div class="col-lg-6">
+
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Id - Name Group</th>
+                        <td>{{ $groups->id .' - '. $groups->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Id - Name User</th>
+                        <td>{{ $users->id .' - '. $users->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Jumlah Siswa</th>
+                        <td>{{ $count }} Siswa</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <table class="table table-striped-columns">
-            <a href="{{ route('members.create', $id) }}" class="btn btn-md btn-success mb-3">ADD NEW ({{ Auth::user()->name }})</a>
+            <a href="{{ route('members.create', $groups->id) }}" class="btn btn-md btn-success mb-3">ADD NEW ({{ Auth::user()->name }})</a>
             <thead>
                 <tr class="table-success">
                     <th scope="col">
                         <center>ID
                     </th>
                     <th scope="col">
-                        <center>group_id
+                        <center>group_id - Name
                     </th>
                     <th scope="col">
-                        <center>student_id
+                        <center>student_id - Name
                     </th>
                     <th scope="col" colspan="2">
                         <center>Action
@@ -67,8 +77,8 @@
                 @forelse($members as $member)
                 <tr>
                     <td>{{ $member->id }}</td>
-                    <td>{{ $member->group_id }}</td>
-                    <td>{{ $member->student_id }}</td>
+                    <td>{{ $member->group_id .'-'. $groups->name }}</td>
+                    <td>{{ $member->student_id . '-' . $member->student_name }}</td>
                     <td class="text-center">
                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('members.destroy', $member->id) }}" method="POST">
                             <a href="{{ route('members.edit', $member->id) }}" class="btn btn-sm btn-primary">EDIT</a>

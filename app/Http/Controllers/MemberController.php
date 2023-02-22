@@ -9,22 +9,6 @@ use Illuminate\Support\Facades\DB;
 class MemberController extends Controller
 {
     /**
-     * index
-     * 
-     * @return void
-     */
-    // public function index(Request $request)
-    // {
-    //     $group_id = $request->query('group_id');
-    //     $members = DB::table('members')->where('group_id', $group_id)->get();
-
-
-    //     // Render View with member
-    //     return view('members.index', compact('members'));
-
-    // }
-
-    /**
      * create
      *
      * @return void
@@ -42,7 +26,6 @@ class MemberController extends Controller
             ->get();
         
         return view('members.create', compact('members','id','student'));
-        // return view('members.create', ['id' => $id, 'members' => $members]);
     }
 
     /**
@@ -70,4 +53,5 @@ class MemberController extends Controller
         //redirect to index
         return redirect()->route('groups.show', $groupId )->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
 }

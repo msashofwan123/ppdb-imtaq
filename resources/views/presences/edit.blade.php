@@ -33,7 +33,7 @@
                                 <select type="text" class="form-control  @error('schedule_id') is-invalid @enderror" name="schedule_id" id="schedule_id">
                                     <option>Pilih Schedule</option>
                                     @foreach ($schedule as $schedule)
-                                    <option value="{{ $schedule->id }}" {{ $schedule->id == $selectedScheduleId ? 'selected' : '' }}>{{ $schedule->id }}. {{ $schedule->name }}</option>
+                                    <option value="{{ $schedule->id }}" {{ $schedule->id == $selectedIds->schedule_id ? 'selected' : '' }}>{{ $schedule->id }}. {{ $schedule->name }}</option>
                                     @endforeach
                                 </select>
 
@@ -50,7 +50,7 @@
                                 <select type="text" class="form-control  @error('student_id') is-invalid @enderror" name="student_id" id="student_id">
                                     <option>Pilih Student</option>
                                     @foreach ($student as $student)
-                                    <option value="{{ $student->id }}" {{ $student->id == $selectedStudentId ? 'selected' : '' }}>{{ $student->id }}. {{ $student->name }}</option>
+                                    <option value="{{ $student->id }}" {{ $student->id == $selectedIds->student_id ? 'selected' : '' }}>{{ $student->id }}. {{ $student->name }}</option>
                                     @endforeach
                                 </select>
 
