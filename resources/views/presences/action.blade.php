@@ -115,6 +115,13 @@
                             </div>
 
                             @endforelse
+
+                            <tr>
+                                <td colspan="4">
+                                    <label class="font-weight-bold" for="subject">Materi</label>
+                                    <textarea type="text" name="subject" id="subject" placeholder="Tuliskan Materi Di Sini" rows="4" cols="130" style="resize:none;"></textarea>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <button type="submit" class="btn btn-md btn-success"><i class="fa fa-cogs"></i> SUBMIT</button>
