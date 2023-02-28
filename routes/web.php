@@ -11,6 +11,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\QuizzesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +52,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/members/{id}/create', [MemberController::class, 'create'])->name('members.create');
+Route::resource('quizzes', QuizzesController::class);
