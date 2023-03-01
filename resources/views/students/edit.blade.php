@@ -15,15 +15,6 @@
 
 <body style="background: lightgray">
 
-    <main>
-        <!-- Awal Header -->
-        <?php
-        // include("style/header.php");
-        ?>
-        <!-- Akhir Header -->
-
-    </main>
-
     <!-- Awal Data Form -->
     <br>
     <div class="container">
@@ -35,7 +26,6 @@
 
                             @csrf
                             @method('put')
-
 
                             <div class="form-group">
                                 <label class="font-weight-bold">NISN</label>
@@ -49,9 +39,11 @@
                                 @enderror
                             </div>
 
+                            <input type="hidden" name="user_id" id="user_id" value="{{ $student->user_id }}">
+
                             <div class="form-group">
                                 <label class="font-weight-bold">Full Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $student->name }}" placeholder="Rendi Pratama">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $student->user->name }}" placeholder="Rendi Pratama">
 
                                 <!-- error message untuk name -->
                                 @error('name')
@@ -63,7 +55,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $student->email }}" placeholder="youremail@email.com">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $student->user->email }}" placeholder="youremail@email.com">
 
                                 <!-- error message untuk email -->
                                 @error('email')
@@ -84,7 +76,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            
+
                             <div class="form-group">
                                 <label class="font-weight-bold">Photo</label>
                                 <div>

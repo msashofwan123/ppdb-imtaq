@@ -159,6 +159,18 @@
                 Questions Data
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="fa fa-podcast"></i>
+                User Answer
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('users.index') }}">
+                <i class="fa fa-lock"></i>
+                Users Control
+              </a>
+            </li>
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">

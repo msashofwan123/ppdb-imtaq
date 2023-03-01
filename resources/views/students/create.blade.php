@@ -15,15 +15,6 @@
 
 <body style="background: lightgray">
 
-    <main>
-        <!-- Awal Header -->
-        <?php
-        // include("style/header.php");
-        ?>
-        <!-- Akhir Header -->
-
-    </main>
-
     <!-- Awal Data Form -->
     <br>
     <div class="container">
@@ -65,6 +56,18 @@
 
                                 <!-- error message untuk email -->
                                 @error('email')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Password</label>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password">
+
+                                <!-- error message untuk password -->
+                                @error('password')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>

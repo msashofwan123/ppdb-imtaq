@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\Controller;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PostController;
@@ -37,6 +38,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
 Route::middleware(['auth', 'user-access'])->group(function () {
+    Route::resource('users', UserController::class);
     Route::resource('students', StudentController::class);
     Route::resource('posts', PostController::class);
     Route::resource('groups', GroupController::class);

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->biginteger('number');
-            $table->string('name');
-            $table->string('email');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->biginteger('phone');
             $table->string('photo');
             $table->timestamps();

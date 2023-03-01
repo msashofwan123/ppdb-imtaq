@@ -12,9 +12,13 @@ class Student extends Model
 
     protected $fillable = [
         'number',
-        'name',
-        'email',
+        'user_id',
         'phone',
         'photo',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

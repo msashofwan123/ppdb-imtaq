@@ -27,30 +27,21 @@
         </h1>
 
         <table class="table table-striped-columns">
+            @can('tuRole')
             <a href="{{ route('students.create') }}" class="btn btn-md btn-success mb-3">ADD NEW</a>
+            @endcan
             <thead>
-                <tr class="table-success">
-                    <th scope="col">
-                        <center>ID
-                    </th>
-                    <th scope="col">
-                        <center>NISN
-                    </th>
-                    <th scope="col">
-                        <center>Name
-                    </th>
-                    <th scope="col">
-                        <center>Email
-                    </th>
-                    <th scope="col">
-                        <center>Phone
-                    </th>
-                    <th scope="col">
-                        <center>Photo
-                    </th>
-                    <th scope="col" colspan="2">
-                        <center>Action
-                    </th>
+                <tr class="table-success text-center">
+                    <th>ID</th>
+                    <th>NISN</th>
+                    <th>User_id</th>
+                    <th>Users.Name</th>
+                    <th>Users.Email</th>
+                    <th>Phone</th>
+                    <th>Photo</th>
+                    @can('tuRole')
+                    <th>Action</th>
+                    @endcan('tuRole')
                 </tr>
             </thead>
 
@@ -59,20 +50,23 @@
                 <tr>
                     <td>{{ $student->id }}</td>
                     <td>{{ $student->number }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->email}}</td>
+                    <td>{{ $student->user_id }}</td>
+                    <td>{{ $student->user->name }}</td>
+                    <td>{{ $student->user->email}}</td>
                     <td>{{ $student->phone}}</td>
                     <td class="text-center">
                         <img src="{{ Storage::url('public/students/').$student->photo }}" class="rounded" style="width: 150px">
                     </td>
+                    @can('tuRole')
                     <td class="text-center">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('students.destroy', $student->id) }}" method="POST">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $student->user_id) }}" method="POST">
                             <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger">DELETE</button>
                         </form>
                     </td>
+                    @endcan
                 </tr>
 
                 @empty
@@ -89,26 +83,8 @@
         </div>
     </div>
 
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
-    <!-- <script>
-        //message with toastr
-        @if(session()->has('success'))
-        
-            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
-
-        @elseif(session()->has('error'))
-
-            toastr.error('{{ session('error') }}', 'GAGAL!'); 
-            
-        @endif
-    </script> -->
 </body>
-
 
 </html>
 @stop

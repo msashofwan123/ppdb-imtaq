@@ -1,0 +1,25 @@
+.highlight {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.highlight-admin {
+    background-color: blue;
+    color: white;
+}
+.highlight-tu {
+    background-color: rgb(0, 208, 255);
+    color: rgb(0, 0, 0);
+}
+
+.highlight-guru {
+    background-color: green;
+    color: white;
+}
+
+.highlight-member {
+    background-color: yellow;
+    color: black;
+}

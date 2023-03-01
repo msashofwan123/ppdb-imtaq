@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -42,11 +44,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //validate form
-        $request->validate([
-            'number'     => 'required|min:10|max:10',
+        $validate = $request->validate([
+            'number'     => 'required',
             'name'     => 'required|min:3',
             'email'     => 'required|email',
-            'phone'   => 'required|min:9',
+            'password'     => 'required',
+            'phone'   => 'required|min:7',
             'photo'     => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
@@ -54,14 +57,28 @@ class StudentController extends Controller
         $image = $request->file('photo');
         $image->storeAs('public/students', $image->hashName());
 
+        // Create User Data
+        $user = new User();
+        $user->name = $validate['name'];
+        $user->email = $validate['email'];
+        $user->password = Hash::make($validate['password']);
+        $user->save();
+
         //create Student
         Student::create([
+            'user_id'   => $user->id,
             'number'    => $request->number,
-            'name'      => $request->name,
-            'email'     => $request->email,
             'phone'     => $request->phone,
             'photo'     => $image->hashName()
         ]);
+
+        // Create Student Data
+        // $student = new Student();
+        // $student->user_id = $user->id;
+        // $student->number = $validate['number'];
+        // $student->phone = $validate['phone'];
+        // $student->photo = $validate['photo'];
+        // $student->save();
 
         //redirect to index
         return redirect()->route('students.index')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -88,13 +105,20 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         //validate form
-        $request->validate([
+        $validated = $request->validate([
             'number'    => 'required|min:10|max:10',
+            'user_id'   => 'required',
             'name'      => 'required|min:3',
             'email'     => 'required|email',
             'phone'     => 'required|min:9',
             'photo'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        // Update User Data
+        $user = User::find($validated['user_id']);
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->save();
 
         //check if image is uploaded
         if ($request->hasFile('photo')) {
@@ -109,18 +133,14 @@ class StudentController extends Controller
             //update student with new image
             $student->update([
                 'number'    => $request->number,
-                'name'      => $request->name,
-                'email'     => $request->email,
                 'phone'     => $request->phone,
                 'photo'     => $image->hashName()
             ]);
         } else {
 
-            //update post without image
+            //update student without image
             $student->update([
                 'number'    => $request->number,
-                'name'      => $request->name,
-                'email'     => $request->email,
                 'phone'     => $request->phone
             ]);
         }
@@ -140,7 +160,7 @@ class StudentController extends Controller
         //delete image
         Storage::delete('public/students/' . $student->photo);
 
-        //delete post
+        //delete Student
         $student->delete();
 
         //redirect to index

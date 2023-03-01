@@ -31,4 +31,8 @@ class Quiz extends Model
     {
         return $this->belongsTo('App\Models\Group');
     }    
+    public function user()
+    {
+        return $this->hasMany('App\Models\User');
+    }    
 }
