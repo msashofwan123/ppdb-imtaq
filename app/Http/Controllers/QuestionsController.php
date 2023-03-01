@@ -88,7 +88,7 @@ class QuestionsController extends Controller
     {
         $question = Question::findOrFail($id);
 
-        return view('questions.edit', compact('question'));
+        return view('questions.edit', compact('question','id'));
     }
 
     /**
