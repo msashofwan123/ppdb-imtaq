@@ -1,1 +1,3 @@
-php artisan crud:generate Quizzes  --fields='name#string#notnull;group_id#bigint#unsigned;'  --form-helper=html --foreign-keys="group_id#id#groups#cascade"  --relationships="group#belongsTo#App\Models\Group"
+php artisan crud:generate Quizzes  --fields="name#string#notnull;group_id#bigint#unsigned;"  --form-helper=html --foreign-keys="group_id#id#groups#cascade"  --relationships="group#belongsTo#App\Models\Group"
+
+php artisan crud:generate Questions --fields="quiz_id#bigint#unsigned;text#string#notnull;answer_1#string#notnull;answer_2#string#notnull;answer_3#string#notnull;answer_4#string#notnull;correct_answer#integer#notnull;" --form-helper=html --foreign-keys="quiz_id#id#quizzes#cascade" --relationships="quizzes#belongsTo#App\Models\Quiz"

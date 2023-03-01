@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quiz extends Model
+class Question extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'quizzes';
+    protected $table = 'questions';
 
     /**
     * The database primary key value.
@@ -25,10 +25,16 @@ class Quiz extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'group_id'];
+    protected $fillable = ['quiz_id', 'text', 'answer_1', 'answer_2', 'answer_3', 'answer_4', 'correct_answer'];
 
-    public function group()
+    public function quizzes()
     {
-        return $this->belongsTo('App\Models\Group');
-    }    
+        return $this->belongsTo('App\Models\Quiz');
+    }
+
+    public function quiz()
+    {
+        return $this->hasMany('App\Models\Quiz');
+    }
+    
 }

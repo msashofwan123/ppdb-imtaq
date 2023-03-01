@@ -12,6 +12,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizzesController;
+use App\Http\Controllers\QuestionsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('groups', GroupController::class);
     Route::resource('members', MemberController::class);
     Route::resource('schedules', ScheduleController::class);
+    Route::resource('quizzes', QuizzesController::class);
     Route::resource('presences', PresenceController::class);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
@@ -52,4 +54,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/members/{id}/create', [MemberController::class, 'create'])->name('members.create');
-Route::resource('quizzes', QuizzesController::class);
+Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
+Route::resource('questions', QuestionsController::class);

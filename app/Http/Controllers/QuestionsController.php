@@ -4,14 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-use App\Models\Quiz;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
-class QuizzesController extends Controller
+class QuestionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,14 +21,19 @@ class QuizzesController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $quizzes = Quiz::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('group_id', 'LIKE', "%$keyword%")
+            $questions = Question::where('quiz_id', 'LIKE', "%$keyword%")
+                ->orWhere('text', 'LIKE', "%$keyword%")
+                ->orWhere('answer_1', 'LIKE', "%$keyword%")
+                ->orWhere('answer_2', 'LIKE', "%$keyword%")
+                ->orWhere('answer_3', 'LIKE', "%$keyword%")
+                ->orWhere('answer_4', 'LIKE', "%$keyword%")
+                ->orWhere('correct_answer', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $quizzes = Quiz::latest()->paginate($perPage);
+            $questions = Question::latest()->paginate($perPage);
         }
 
-        return view('quizzes.index', compact('quizzes'));
+        return view('questions.index', compact('questions'));
     }
 
     /**
@@ -39,13 +41,11 @@ class QuizzesController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        $userId = Auth::id();
-        $groupOption = DB::table('groups')->get();
-        $quiz = (object) ['group_id' => null];
-        
-        return view('quizzes.create', compact('userId','groupOption','quiz'));
+        $id = $request->input('quiz_id');
+        $question = (object) ['correct_answer' => null];
+        return view('questions.create', compact('id','question'));
     }
 
     /**
@@ -59,10 +59,8 @@ class QuizzesController extends Controller
     {
         
         $requestData = $request->all();
-        
-        Quiz::create($requestData);
-        $check = $request->quiz_id;
-        return redirect('questions/'.$check)->with('flash_message', 'Quiz added!');
+        Question::create($requestData);
+        return redirect('questions')->with('flash_message', 'Question added!');
     }
 
     /**
@@ -74,13 +72,9 @@ class QuizzesController extends Controller
      */
     public function show($id)
     {
-        $quiz = Quiz::findOrFail($id);
-        $data = Question::where('quiz_id', $id)->get();
-        // $data = DB::table('quizzes')
-        // ->join('questions','quizzes.id','=','questions.id')
-        // ->select('questions.*')->where('quiz_id',$id)->get();
+        $question = Question::findOrFail($id);
 
-        return view('quizzes.show', compact('quiz','data'));
+        return view('questions.show', compact('question'));
     }
 
     /**
@@ -92,10 +86,9 @@ class QuizzesController extends Controller
      */
     public function edit($id)
     {
-        $quiz = Quiz::findOrFail($id);
-        $groupOption = DB::table('groups')->get();
+        $question = Question::findOrFail($id);
 
-        return view('quizzes.edit', compact('quiz', 'groupOption'));
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -111,10 +104,10 @@ class QuizzesController extends Controller
         
         $requestData = $request->all();
         
-        $quiz = Quiz::findOrFail($id);
-        $quiz->update($requestData);
+        $question = Question::findOrFail($id);
+        $question->update($requestData);
 
-        return redirect('quizzes')->with('flash_message', 'Quiz updated!');
+        return redirect('questions')->with('flash_message', 'Question updated!');
     }
 
     /**
@@ -126,8 +119,8 @@ class QuizzesController extends Controller
      */
     public function destroy($id)
     {
-        Quiz::destroy($id);
+        Question::destroy($id);
 
-        return redirect('quizzes')->with('flash_message', 'Quiz deleted!');
+        return redirect('questions')->with('flash_message', 'Question deleted!');
     }
 }
