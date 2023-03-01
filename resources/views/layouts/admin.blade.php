@@ -114,7 +114,7 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ url('/dashboard') }}">
                 <i class="fa-solid fa-gauge"></i>
-                Dashboard
+                ({{ Auth::user()->role }}) Dashboard
               </a>
             </li>
             <li class="nav-item">

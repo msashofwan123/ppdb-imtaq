@@ -41,7 +41,7 @@
                     <th>Photo</th>
                     @can('tuRole')
                     <th>Action</th>
-                    @endcan('tuRole')
+                    @endcan
                 </tr>
             </thead>
 
