@@ -137,13 +137,13 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('schedules.index') }}">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa fa-list-alt"></i>
                 Schedules
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('presences.index') }}">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa fa-link"></i>
                 Presences
               </a>
             </li>
