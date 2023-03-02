@@ -18,4 +18,12 @@ class Member extends Model
         'group_id',
         'student_id',
     ];
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }
