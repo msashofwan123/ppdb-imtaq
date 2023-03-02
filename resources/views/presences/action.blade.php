@@ -25,15 +25,15 @@
                             </tr>
                             <tr>
                                 <th>Id - Name Group</th>
-                                <td>{{ $schedule->group_id }} - {{ $result->group_name }}</td>
+                                <td>{{ $schedule->group_id }} - {{ $schedule->group->name }}</td>
                             </tr>
                             <tr>
                                 <th>Id - Name User</th>
-                                <td>{{ $schedule->user_id }} - {{ $result->user_name }}</td>
+                                <td>{{ $schedule->user_id }} - {{ $schedule->user->name }}</td>
                             </tr>
                             <tr>
                                 <th>Jumlah Siswa</th>
-                                <td>{{ $count }} Siswa</td>
+                                <td>{{ $schedule->group->member->count() }} Siswa</td>
                             </tr>
                             <tr>
                                 <th>Note</th>
@@ -65,9 +65,10 @@
                             </thead>
 
                             <tbody>
-                                @forelse ($presence as $item)
+                                @forelse ($members as $item)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <input type="hidden" name="scheduleid" value="{{ $schedule->id }}">
                                     <input type="hidden" name="items[{{ $item->id }}][schedule_id]" value="{{ $schedule->id }}">
                                     <td>{{ $item->student_id }}</td>
                                     <input type="hidden" name="items[{{ $item->id }}][student_id]" value="{{ $item->student_id }}">
@@ -85,8 +86,8 @@
                                             <label class="form-check-label" for="presence3">Izin</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Alfa">
-                                            <label class="form-check-label" for="presence3">Alfa</label>
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence4" value="Alfa">
+                                            <label class="form-check-label" for="presence4">Alfa</label>
                                         </div>
                                         <!-- error message untuk presence -->
                                         @error('presence')

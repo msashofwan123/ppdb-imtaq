@@ -29,11 +29,12 @@
                             @method('put')
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Presence Id</label>
-                                <select type="text" class="form-control  @error('schedule_id') is-invalid @enderror" name="schedule_id" id="schedule_id">
+                                <label class="font-weight-bold">Schedule Id</label>
+                                <input type="hidden" name="schedule_id" id="schedule_id" value="{{ $presence->schedule->id }}">
+                                <select type="text" class="form-control  @error('schedule_id') is-invalid @enderror" name="schedule_id" id="schedule_id" disabled>
                                     <option>Pilih Schedule</option>
-                                    @foreach ($schedule as $schedule)
-                                    <option value="{{ $schedule->id }}" {{ $schedule->id == $selectedIds->schedule_id ? 'selected' : '' }}>{{ $schedule->id }}. {{ $schedule->name }}</option>
+                                    @foreach ($schedule as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $selectedIds->schedule_id ? 'selected' : '' }}>{{ $item->id }}. ({{ $item->group->name }})</option>
                                     @endforeach
                                 </select>
 
@@ -46,11 +47,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Student Id</label>
-
-                                <select type="text" class="form-control  @error('student_id') is-invalid @enderror" name="student_id" id="student_id">
+                                <input type="hidden" name="student_id" id="student_id" value="{{ $presence->student->id }}">
+                                <select type="text" class="form-control  @error('student_id') is-invalid @enderror" name="student_id" id="student_id" disabled>
                                     <option>Pilih Student</option>
-                                    @foreach ($student as $student)
-                                    <option value="{{ $student->id }}" {{ $student->id == $selectedIds->student_id ? 'selected' : '' }}>{{ $student->id }}. {{ $student->name }}</option>
+                                    @foreach ($student as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $selectedIds->student_id ? 'selected' : '' }}>{{ $item->id }}. ({{ $item->user->name }})</option>
                                     @endforeach
                                 </select>
 
@@ -61,6 +62,7 @@
                                 </div>
                                 @enderror
                             </div>
+                            <br />
                             <div class="form-group">
                                 <label class="font-weight-bold">Presence</label>
 
@@ -77,8 +79,8 @@
                                     <label class="form-check-label" for="presence3">Izin</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence3" value="Alfa" {{ $presence->presence == 'Alfa' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="presence3">Alfa</label>
+                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence4" value="Alfa" {{ $presence->presence == 'Alfa' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="presence4">Alfa</label>
                                 </div>
 
                                 <!-- error message untuk presence -->
@@ -111,17 +113,9 @@
             <div class="col-lg-1"></div>
         </div>
     </div>
-
-
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
 
 </body>
-
 
 </html>
 @stop
