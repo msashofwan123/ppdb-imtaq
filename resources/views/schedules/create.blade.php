@@ -15,15 +15,6 @@
 
 <body style="background: lightgray">
 
-    <main>
-        <!-- Awal Header -->
-        <?php
-        // include("style/header.php");
-        ?>
-        <!-- Akhir Header -->
-
-    </main>
-
     <!-- Awal Data Form -->
     <br>
     <div class="container">
@@ -40,9 +31,9 @@
                                 <!-- <input type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" value="{{ old('group_id') }}" placeholder="#"> -->
                                 <select type="text" class="form-control  @error('group_id') is-invalid @enderror" name="group_id" id="group_id">
                                     <option>Pilih Group</option>
-                                        @foreach ($group as $group)
-                                            <option value="{{ $group->id }}">{{ $group->id }}. {{ $group->name }}</option>
-                                        @endforeach
+                                    @foreach ($group as $item)
+                                    <option value="{{ $item->id }}">{{ $item->id }}. {{ $item->name }} - {{ $item->user->name }}</option>
+                                    @endforeach
                                 </select>
 
                                 <!-- error message untuk group_id -->
@@ -52,28 +43,28 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">User Id</label>
-                                <!-- <input type="number" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" placeholder="#"> -->
+                            <!-- <div class="form-group">
+                                <label class="font-weight-bold">User Id</label> -->
+                            <!-- <input type="number" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" placeholder="#"> -->
 
-                                <select type="text" class="form-control  @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
+                            <!-- <select type="text" class="form-control  @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
                                     <option>Pilih User</option>
-                                        @foreach ($user as $user)
-                                            <option value="{{ $user->id }}">{{ $user->id }}. {{ $user->name }}</option>
-                                        @endforeach
-                                </select>
+                                    @foreach ($user as $user)
+                                    <option value="{{ $user->id }}">{{ $user->id }}. {{ $user->name }}</option>
+                                    @endforeach
+                                </select> -->
 
-                                <!-- error message untuk user_id -->
-                                @error('user_id')
+                            <!-- error message untuk user_id -->
+                            <!-- @error('user_id')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>
                                 @enderror
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label class="font-weight-bold">Note</label>
-                                <input type="text" class="form-control @error('note') is-invalid @enderror" name="note" value="{{ old('note') }}" placeholder="">
-
+                                <input type="text" class="form-control @error('note') is-invalid @enderror" name="note" value="{{ old('note') }}">
+                                <small>Note can be empty</small>
                                 <!-- error message untuk note -->
                                 @error('note')
                                 <div class="alert alert-danger mt-2">
@@ -81,27 +72,30 @@
                                 </div>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">Time Start</label>
-                                <input type="text" class="form-control @error('time_start_at') is-invalid @enderror" name="time_start_at" value="{{ old('time_start_at') }}" placeholder="">
+                            <br />
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label class="font-weight-bold">Time Start</label>
+                                    <input type="text" class="form-control @error('time_start_at') is-invalid @enderror" name="time_start_at" value="{{ old('time_start_at') }}" placeholder="">
 
-                                <!-- error message untuk time_start_at -->
-                                @error('time_start_at')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                                    <!-- error message untuk time_start_at -->
+                                    @error('time_start_at')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">Time End</label>
-                                <input type="text" class="form-control @error('time_end_at') is-invalid @enderror" name="time_end_at" value="{{ old('time_end_at') }}" placeholder="">
+                                <div class="form-group col-lg-6">
+                                    <label class="font-weight-bold">Time End</label>
+                                    <input type="text" class="form-control @error('time_end_at') is-invalid @enderror" name="time_end_at" value="{{ old('time_end_at') }}" placeholder="">
 
-                                <!-- error message untuk time_end_at -->
-                                @error('time_end_at')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
+                                    <!-- error message untuk time_end_at -->
+                                    @error('time_end_at')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
-                                @enderror
                             </div>
                             <br>
                             <button type="submit" class="btn btn-md btn-primary">SUMBIT</button>
@@ -114,17 +108,9 @@
             <div class="col-lg-1"></div>
         </div>
     </div>
-
-
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
 
 </body>
-
 
 </html>
 @stop

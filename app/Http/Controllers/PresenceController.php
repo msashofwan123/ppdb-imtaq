@@ -39,19 +39,6 @@ class PresenceController extends Controller
     return view('presences.action', compact('schedule', 'result', 'count', 'presence'));
 }
 
-    /**
-     * create
-     *
-     * @return void
-     */
-    public function create()
-    {
-        $presence = Presence::All();
-        $schedule = Schedule::All();
-        $student = Student::All();
-        return view('presences.create', compact('presence', 'schedule', 'student'));
-    }
-
     public function store(Request $request)
     {
         $presences = Presence::All();

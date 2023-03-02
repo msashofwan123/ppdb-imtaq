@@ -44,7 +44,6 @@
                         @endcan
                     </tr>
                 </thead>
-
                 <tbody>
                     @forelse($students as $student)
                     <tr>
@@ -73,7 +72,7 @@
                     <div class="alert alert-danger">
                         <center>DATA NOT FOUND</center>
                     </div>
-
+                    
                     @endforelse
                 </tbody>
             </table>

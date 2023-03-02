@@ -15,10 +15,19 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'group_id',
         'user_id',
+        'group_id',
         'note',
         'time_start_at',
         'time_end_at',
     ];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -15,15 +15,6 @@
 
 <body style="background: lightgray">
 
-    <main>
-        <!-- Awal Header -->
-        <?php
-        // include("style/header.php");
-        ?>
-        <!-- Akhir Header -->
-
-    </main>
-
     <!-- Awal Data Form -->
     <br>
     <div class="container">
@@ -41,34 +32,15 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Group Id</label>
-                                <!-- <input type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" value="{{ old('group_id') }}" placeholder="#"> -->
                                 <select type="text" class="form-control  @error('group_id') is-invalid @enderror" name="group_id" id="group_id">
                                     <option>Pilih Group</option>
-                                        @foreach ($group as $group)
-                                            <option value="{{ $group->id }}" {{ $group->id == $selectedGroupId ? 'selected' : '' }}>{{ $group->id }}. {{ $group->name }}</option>
-                                        @endforeach
+                                    @foreach ($group as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $schedules->user->id ? 'selected' : '' }}>{{ $item->id }}. {{ $item->name }} - {{ $item->user->name }}</option>
+                                    @endforeach
                                 </select>
 
                                 <!-- error message untuk group_id -->
                                 @error('group_id')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">User Id</label>
-                                <!-- <input type="number" class="form-control @error('user_id') is-invalid @enderror" name="user_id" value="{{ old('user_id') }}" placeholder="#"> -->
-
-                                <select type="text" class="form-control  @error('user_id') is-invalid @enderror" name="user_id" id="user_id">
-                                    <option>Pilih User</option>
-                                        @foreach ($user as $user)
-                                            <option value="{{ $user->id }}" {{ $user->id == $selectedUserId ? 'selected' : '' }}>{{ $user->id }}. {{ $user->name }}</option>
-                                        @endforeach
-                                </select>
-
-                                <!-- error message untuk user_id -->
-                                @error('user_id')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>
@@ -119,17 +91,8 @@
             <div class="col-lg-1"></div>
         </div>
     </div>
-
-
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
-
 </body>
-
 
 </html>
 @stop

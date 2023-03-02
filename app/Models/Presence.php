@@ -21,4 +21,16 @@ class Presence extends Model
         'presence',
         'note',
     ];
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
+    }
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
