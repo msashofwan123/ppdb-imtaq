@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,11 +19,11 @@ class GroupController extends Controller
     {
         //get groups
 
-        // $groups = Group::latest()->paginate(5);
-        $groups = DB::table('groups')
-            ->join('users', 'users.id', '=', 'groups.user_id')
-            ->select('groups.*', 'users.name as user_name')
-            ->get();
+        $groups = Group::latest()->paginate(20);
+        // $groups = DB::table('groups')
+        //     ->join('users', 'users.id', '=', 'groups.user_id')
+        //     ->select('groups.*', 'users.name as user_name')
+        //     ->get();
 
         //render view with groups
         return view('groups.index', compact('groups'));
@@ -30,28 +31,28 @@ class GroupController extends Controller
 
     public function show($id)
     {
-        $groups = DB::table('groups')
-            ->select('name', 'id')
-            ->where('id', $id)
-            ->first();
+        $groups = Group::findOrFail($id);
 
-        $users = DB::table('groups')
-            ->join('users', 'users.id', '=', 'groups.user_id')
-            ->select('users.name', 'users.id')
-            ->where('groups.id', $id)
-            ->first();
+        // $members = $groups->member;
 
-        $count = DB::table('members')
-            ->where('group_id', $id)
-            ->count();
+        // $groups = DB::table('groups')
+        // ->select('name', 'id')
+        // ->where('id', $id)
+        // ->first();
 
-        $members = DB::table('members')
-            ->join('students', 'students.id', '=', 'members.student_id')
-            ->select('members.*', 'students.name as student_name')
-            ->where('group_id', $id)
-            ->get();
+        // $users = DB::table('groups')
+        // ->join('users', 'users.id', '=', 'groups.user_id')
+        // ->select('users.name', 'users.id')
+        // ->where('groups.id', $id)
+        // ->first();
 
-        return view('groups.show', compact('members', 'groups', 'users', 'count'));
+        // $members = DB::table('members')
+        //     ->join('students', 'students.id', '=', 'members.student_id')
+        //     ->select('members.*', 'students.name as student_name')
+        //     ->where('group_id', $id)
+        //     ->get();
+
+        return view('groups.show', compact('groups'));
     }
 
     /**
@@ -61,7 +62,10 @@ class GroupController extends Controller
      */
     public function create()
     {
-        $group = User::all();
+        $group = DB::table('users')
+            ->where('role', '!=', 'member')
+            ->get();
+
         return view('groups.create', compact('group'));
     }
 
@@ -99,10 +103,13 @@ class GroupController extends Controller
     public function edit(Group $group)
     {
         // Autentikasi Edit dan Delete Data
-        if (auth()->user()->id != $group->user_id) {
-            return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
-        }
-        return view('groups.edit', compact('group'));
+        // if (auth()->user()->id != $group->user_id) {
+        //     return redirect()->back()->withErrors(['Anda tidak memiliki hak akses untuk mengedit data ini. Silahkan Menghubungi Admin']);
+        // }
+        $groups = DB::table('users')
+            ->where('role', '!=', 'member')
+            ->get();
+        return view('groups.edit', compact('group', 'groups'));
     }
 
     /**
@@ -116,12 +123,14 @@ class GroupController extends Controller
     {
         //validate form
         $request->validate([
+            'user_id'     => 'required',
             'name'      => 'required|min:5',
         ]);
 
         //update Group
         $group->update([
-            'name'      => $request->name
+            'user_id'   => $request->user_id,
+            'name'      => $request->name,
         ]);
 
         //redirect to index
