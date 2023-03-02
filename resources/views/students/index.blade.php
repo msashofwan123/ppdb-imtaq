@@ -28,7 +28,7 @@
 
         <table class="table table-striped-columns">
             @can('tuRole')
-            <a href="{{ route('students.create') }}" class="btn btn-md btn-success mb-3">ADD NEW</a>
+            <a href="{{ route('students.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus"></i> ADD NEW</a>
             @endcan
             <thead>
                 <tr class="table-success text-center">
@@ -60,10 +60,10 @@
                     @can('tuRole')
                     <td class="text-center">
                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $student->user_id) }}" method="POST">
-                            <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                            <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i> EDIT</a>
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">DELETE</button>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> DELETE</button>
                         </form>
                     </td>
                     @endcan

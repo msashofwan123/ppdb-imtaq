@@ -46,7 +46,7 @@
                                 <select type="text" class="form-control  @error('student_id') is-invalid @enderror" name="student_id" id="student_id">
                                     <option value="">Pilih Student</option>
                                     @foreach ($student as $item)
-                                    <option value="{{ $item->id }}">{{ $item->id }}. {{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->id }}. {{ $item->user->name }}</option>
                                     @endforeach
                                 </select>
 

@@ -13,122 +13,122 @@
 </head>
 
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <th>Id Schedule</th>
-                            <td>{{ $schedule->id }}</td>
-                        </tr>
-                        <tr>
-                            <th>Id - Name Group</th>
-                            <td>{{ $schedule->group_id }} - {{ $result->group_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Id - Name User</th>
-                            <td>{{ $schedule->user_id }} - {{ $result->user_name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Jumlah Siswa</th>
-                            <td>{{ $count }} Siswa</td>
-                        </tr>
-                        <tr>
-                            <th>Note</th>
-                            <td>{{ $schedule->note }}</td>
-                        </tr>
-                        <tr>
-                            <th>Waktu Pembelajaran</th>
-                            <td>{{ $schedule->time_start_at.' WIB - '.$schedule->time_end_at. ' WIB' }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Id Schedule</th>
+                                <td>{{ $schedule->id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Id - Name Group</th>
+                                <td>{{ $schedule->group_id }} - {{ $result->group_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Id - Name User</th>
+                                <td>{{ $schedule->user_id }} - {{ $result->user_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Jumlah Siswa</th>
+                                <td>{{ $count }} Siswa</td>
+                            </tr>
+                            <tr>
+                                <th>Note</th>
+                                <td>{{ $schedule->note }}</td>
+                            </tr>
+                            <tr>
+                                <th>Waktu Pembelajaran</th>
+                                <td>{{ $schedule->time_start_at.' WIB - '.$schedule->time_end_at. ' WIB' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <div class="row">
+            <div class="table-responsive">
+                <div class="col-lg-10">
+                    <form action="{{ route('presences.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Presence</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
 
-            <div class="col-lg-10">
-                <form action="{{ route('presences.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Presence</th>
-                                <th>Note</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            @forelse ($presence as $item)
-                            <tr>
-                                <td>1</td>
-                                <input type="hidden" name="items[{{ $item->id }}][schedule_id]" value="{{ $schedule->id }}">
-                                <td>{{ $item->student_id }}</td>
-                                <input type="hidden" name="items[{{ $item->id }}][student_id]" value="{{ $item->student_id }}">
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence1" value="Hadir">
-                                        <label class="form-check-label" for="presence1">Hadir</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence2" value="Sakit">
-                                        <label class="form-check-label" for="presence2">Sakit</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Izin">
-                                        <label class="form-check-label" for="presence3">Izin</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Alfa">
-                                        <label class="form-check-label" for="presence3">Alfa</label>
-                                    </div>
-                                    <!-- error message untuk presence -->
-                                    @error('presence')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control @error('note') is-invalid @enderror" name="items[{{ $item->id }}][note]">
-
-                                        <!-- error message untuk note -->
-                                        @error('note')
+                            <tbody>
+                                @forelse ($presence as $item)
+                                <tr>
+                                    <td>1</td>
+                                    <input type="hidden" name="items[{{ $item->id }}][schedule_id]" value="{{ $schedule->id }}">
+                                    <td>{{ $item->student_id }}</td>
+                                    <input type="hidden" name="items[{{ $item->id }}][student_id]" value="{{ $item->student_id }}">
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence1" value="Hadir">
+                                            <label class="form-check-label" for="presence1">Hadir</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence2" value="Sakit">
+                                            <label class="form-check-label" for="presence2">Sakit</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Izin">
+                                            <label class="form-check-label" for="presence3">Izin</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Alfa">
+                                            <label class="form-check-label" for="presence3">Alfa</label>
+                                        </div>
+                                        <!-- error message untuk presence -->
+                                        @error('presence')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                         @enderror
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control @error('note') is-invalid @enderror" name="items[{{ $item->id }}][note]">
 
-                            @empty
-                            <div class="alert alert-danger">
-                                <center>DATA NOT FOUND</center>
-                            </div>
+                                            <!-- error message untuk note -->
+                                            @error('note')
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </td>
+                                </tr>
 
-                            @endforelse
+                                @empty
+                                <div class="alert alert-danger">
+                                    <center>DATA NOT FOUND</center>
+                                </div>
 
-                            <tr>
-                                <td colspan="4">
-                                    <label class="font-weight-bold" for="subject">Materi</label>
-                                    <textarea type="text" name="subject" id="subject" placeholder="Tuliskan Materi Di Sini" rows="4" cols="130" style="resize:none;"></textarea>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="submit" class="btn btn-md btn-success"><i class="fa fa-cogs"></i> SUBMIT</button>
-                    <button type="reset" class="btn btn-md btn-warning"><i class="fa fa-refresh"></i> RESET</button>
-                </form>
+                                @endforelse
+
+                                <tr>
+                                    <td colspan="4">
+                                        <label class="font-weight-bold" for="subject">Materi</label>
+                                        <textarea type="text" name="subject" id="subject" placeholder="Tuliskan Materi Di Sini" rows="4" cols="130" style="resize:none;"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-md btn-success"><i class="fa fa-cogs"></i> SUBMIT</button>
+                        <button type="reset" class="btn btn-md btn-warning"><i class="fa fa-refresh"></i> RESET</button>
+                    </form>
+                </div>
             </div>
-
         </div>
     </div>
 </body>
