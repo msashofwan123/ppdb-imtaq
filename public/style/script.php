@@ -10,3 +10,6 @@
 
 <!-- CKEDITOR CDN  -->
 <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+
+<!-- FONT AWESOME KIT -->
+<script src="https://kit.fontawesome.com/30f09fe5e7.js" crossorigin="anonymous"></script>
