@@ -18,4 +18,17 @@ class Group extends Model
         'user_id',
         'name',
     ];
+
+    public function student()
+    {
+        return $this->hasMany(Student::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function member()
+    {
+        return $this->hasMany(Member::class);
+    }
 }

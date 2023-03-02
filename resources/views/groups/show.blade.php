@@ -30,76 +30,68 @@
         </div>
         @endif
 
-
         <h1>
             <center>ACTIVE MEMBERS DATA
         </h1>
-        <div class="col-lg-6">
-
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <th>Id - Name Group</th>
-                        <td>{{ $groups->id .' - '. $groups->name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Id - Name User</th>
-                        <td>{{ $users->id .' - '. $users->name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Jumlah Siswa</th>
-                        <td>{{ $count }} Siswa</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="table-responsive">
+            <div class="col-lg-6">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Id - Name Group</th>
+                            <td>{{ $groups->id .' - '. $groups->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Id - Name User</th>
+                            <td>{{ $groups->user->id .' - '. $groups->user->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Jumlah Siswa</th>
+                            <td>{{ $groups->member->count(); }} Siswa</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <div class="table-responsive">
+            <table class="table table-striped-columns">
+                @can('tuRole')
+                <a href="{{ route('members.create', $groups->id) }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus" aria-hidden="true"></i> ADD NEW ({{ Auth::user()->name }})</a>
+                @endcan
+                <thead>
+                    <tr class="table-success">
+                        <th>ID</th>
+                        <th>Group_id - Name</th>
+                        <th>Student_id - Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-        <table class="table table-striped-columns">
-            <a href="{{ route('members.create', $groups->id) }}" class="btn btn-md btn-success mb-3">ADD NEW ({{ Auth::user()->name }})</a>
-            <thead>
-                <tr class="table-success">
-                    <th scope="col">
-                        <center>ID
-                    </th>
-                    <th scope="col">
-                        <center>group_id - Name
-                    </th>
-                    <th scope="col">
-                        <center>student_id - Name
-                    </th>
-                    <th scope="col" colspan="2">
-                        <center>Action
-                    </th>
-                </tr>
-            </thead>
+                <tbody>
+                    @forelse($groups->member as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->group->id .' - '. $item->group->name }}</td>
+                        <td>{{ $item->student->id . ' - ' . $item->student->user->name }}</td>
+                        <td class="text-center">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('members.destroy', $item->id) }}" method="POST">
+                                <a href="{{ route('members.edit', $item->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i> EDIT</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> DELETE</button>
+                            </form>
+                        </td>
+                    </tr>
 
-            <tbody>
-                @forelse($members as $member)
-                <tr>
-                    <td>{{ $member->id }}</td>
-                    <td>{{ $member->group_id .'-'. $groups->name }}</td>
-                    <td>{{ $member->student_id . '-' . $member->student_name }}</td>
-                    <td class="text-center">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('members.destroy', $member->id) }}" method="POST">
-                            <a href="{{ route('members.edit', $member->id) }}" class="btn btn-sm btn-primary">EDIT</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger">DELETE</button>
-                        </form>
-                    </td>
-                </tr>
+                    @empty
+                    <div class="alert alert-danger">
+                        <center>DATA NOT FOUND</center>
+                    </div>
 
-                @empty
-                <div class="alert alert-danger">
-                    <center>DATA NOT FOUND</center>
-                </div>
-
-                @endforelse
-            </tbody>
-            <!-- Akhir Data Table -->
-        </table>
-        <div>
-
+                    @endforelse
+                </tbody>
+                <!-- Akhir Data Table -->
+            </table>
         </div>
     </div>
     <?php include('style/script.php'); ?>
