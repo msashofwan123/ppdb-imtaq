@@ -25,62 +25,59 @@
         <h1>
             <center>ACTIVE STUDENT DATA
         </h1>
+        <div class="table-responsive">
+            <table class="table table-striped-columns">
+                @can('tuRole')
+                <a href="{{ route('students.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus" aria-hidden="true"></i> ADD NEW</a>
+                @endcan
+                <thead>
+                    <tr class="table-success text-center">
+                        <th>ID</th>
+                        <th>NISN</th>
+                        <th>User_id</th>
+                        <th>Users.Name</th>
+                        <th>Users.Email</th>
+                        <th>Phone</th>
+                        <th>Photo</th>
+                        @can('tuRole')
+                        <th>Action</th>
+                        @endcan
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($students as $student)
+                    <tr>
+                        <td>{{ $student->id }}</td>
+                        <td>{{ $student->number }}</td>
+                        <td>{{ $student->user_id }}</td>
+                        <td>{{ $student->user->name }}</td>
+                        <td>{{ $student->user->email}}</td>
+                        <td>{{ $student->phone}}</td>
+                        <td class="text-center">
+                            <img src="{{ Storage::url('public/students/').$student->photo }}" class="rounded" style="width: 150px">
+                        </td>
+                        @can('tuRole')
+                        <td class="text-center">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $student->user_id) }}" method="POST">
+                                <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i> EDIT</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> DELETE</button>
+                            </form>
+                        </td>
+                        @endcan
+                    </tr>
 
-        <table class="table table-striped-columns">
-            @can('tuRole')
-            <a href="{{ route('students.create') }}" class="btn btn-md btn-success mb-3"><i class="fa fa-plus"></i> ADD NEW</a>
-            @endcan
-            <thead>
-                <tr class="table-success text-center">
-                    <th>ID</th>
-                    <th>NISN</th>
-                    <th>User_id</th>
-                    <th>Users.Name</th>
-                    <th>Users.Email</th>
-                    <th>Phone</th>
-                    <th>Photo</th>
-                    @can('tuRole')
-                    <th>Action</th>
-                    @endcan('tuRole')
-                </tr>
-            </thead>
-
-            <tbody>
-                @forelse($students as $student)
-                <tr>
-                    <td>{{ $student->id }}</td>
-                    <td>{{ $student->number }}</td>
-                    <td>{{ $student->user_id }}</td>
-                    <td>{{ $student->user->name }}</td>
-                    <td>{{ $student->user->email}}</td>
-                    <td>{{ $student->phone}}</td>
-                    <td class="text-center">
-                        <img src="{{ Storage::url('public/students/').$student->photo }}" class="rounded" style="width: 150px">
-                    </td>
-                    @can('tuRole')
-                    <td class="text-center">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('users.destroy', $student->user_id) }}" method="POST">
-                            <a href="{{ route('students.edit', $student->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-pen-to-square"></i> EDIT</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i> DELETE</button>
-                        </form>
-                    </td>
-                    @endcan
-                </tr>
-
-                @empty
-                <div class="alert alert-danger">
-                    <center>DATA NOT FOUND</center>
-                </div>
-
-                @endforelse
-            </tbody>
-            <!-- Akhir Data Table -->
-        </table>
-        <div>
-            <!-- {{ $students->Links() }} -->
+                    @empty
+                    <div class="alert alert-danger">
+                        <center>DATA NOT FOUND</center>
+                    </div>
+                    
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+        <!-- Akhir Data Table -->
     </div>
 
     <?php include('style/script.php'); ?>

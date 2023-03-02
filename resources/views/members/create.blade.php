@@ -28,7 +28,9 @@
                             @csrf
                             <div class="form-group">
                                 <label class="font-weight-bold">Group Id</label>
-                                <input type="number" readonly class="form-control @error('group_id') is-invalid @enderror" name="group_id" id="group_id" value="{{ $id }}">
+                                <select type="number" class="form-control @error('group_id') is-invalid @enderror" name="group_id" id="group_id">
+                                    <option value="{{ $data->id }}">{{ $data->id }}. {{ $data->name }}</option>
+                                </select>
                                 <small>This field is filled in automatically by the system</small>
                                 <!-- error message untuk group_id -->
                                 @error('group_id')

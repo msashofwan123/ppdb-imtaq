@@ -97,7 +97,7 @@
                                 </div>
                                 @enderror
                             </div>
-                            <br>
+                            <br />
                             <button type="submit" class="btn btn-md btn-primary">SUMBIT</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
 
@@ -109,16 +109,9 @@
         </div>
     </div>
 
-
-    <!-- Start Footer Code -->
-    <?php
-    // include("style/footer.php")
-    ?>
-    <!-- End Footer Code -->
     <?php include('style/script.php'); ?>
 
 </body>
-
 
 </html>
 @stop

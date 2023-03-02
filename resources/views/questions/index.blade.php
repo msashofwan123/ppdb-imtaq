@@ -7,9 +7,6 @@
             <div class="card">
                 <div class="card-header">Questions</div>
                 <div class="card-body">
-                    <!-- <a href="{{ url('/questions/create') }}" class="btn btn-success btn-sm" title="Add New Question">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a> -->
 
                     <form method="GET" action="{{ url('/questions') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                         <div class="input-group">

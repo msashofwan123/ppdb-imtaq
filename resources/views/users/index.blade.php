@@ -32,66 +32,55 @@
         @endif
 
         <h1>
-            <center>User Control
+            <center>Users Control
         </h1>
+        <div class="table-responsive">
+            <table class="table table-striped-columns">
+                <a href="" class="btn btn-md btn-success mb-3"><i class="fa fa-plus"></i> ADD NEW ({{ Auth::user()->name }})</a>
+                <thead>
+                    <tr class="table-success text-center">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Email Verified At</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-        <table class="table table-striped-columns">
-            <a href="" class="btn btn-md btn-success mb-3"><i class="fa fa-plus-circle"></i> ADD NEW ({{ Auth::user()->name }})</a>
-            <thead>
-                <tr class="table-success">
-                    <th scope="col">
-                        <center>ID
-                    </th>
-                    <th scope="col">
-                        <center>Name
-                    </th>
-                    <th scope="col">
-                        <center>Email
-                    </th>
-                    <th scope="col">
-                        <center>Email Verified At
-                    </th>
-                    <th scope="col">
-                        <center>Role
-                    </th>
-                    <th scope="col" colspan="2">
-                        <center>Action
-                    </th>
-                </tr>
-            </thead>
+                <tbody>
+                    @forelse($users as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->email_verified_at }}</td>
+                        <td class="text-center">
+                            @if ($item->role === 'admin')
+                            <span class="highlight highlight-admin">ADMIN</span>
+                            @elseif ($item->role === 'guru')
+                            <span class="highlight highlight-guru">GURU</span>
+                            @elseif ($item->role === 'member')
+                            <span class="highlight highlight-member">MEMBER</span>
+                            @elseif ($item->role === 'tu')
+                            <span class="highlight highlight-tu">TATA USAHA</span>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm">Test Doang</button>
+                        </td>
+                    </tr>
 
-            <tbody>
-                @forelse($users as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->email }}</td>
-                    <td>{{ $item->email_verified_at }}</td>
-                    <td class="text-center">
-                        @if ($item->role === 'admin')
-                        <span class="highlight highlight-admin">ADMIN</span>
-                        @elseif ($item->role === 'guru')
-                        <span class="highlight highlight-guru">GURU</span>
-                        @elseif ($item->role === 'member')
-                        <span class="highlight highlight-member">MEMBER</span>
-                        @elseif ($item->role === 'tu')
-                        <span class="highlight highlight-tu">TATA USAHA</span>
-                        @endif
-                    </td>
-                    <td class="text-center">
-                        <button class="btn btn-warning btn-sm">Test Doang</button>
-                    </td>
-                </tr>
+                    @empty
+                    <div class="alert alert-danger">
+                        <center>DATA NOT FOUND</center>
+                    </div>
 
-                @empty
-                <div class="alert alert-danger">
-                    <center>DATA NOT FOUND</center>
-                </div>
-
-                @endforelse
-            </tbody>
-            <!-- Akhir Data Table -->
-        </table>
+                    @endforelse
+                </tbody>
+                <!-- Akhir Data Table -->
+            </table>
+        </div>
     </div>
     <?php include('style/script.php'); ?>
 </body>
