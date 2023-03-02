@@ -32,31 +32,19 @@
         @endif
 
         <h1>
-            <center>User Control
+            <center>Users Control
         </h1>
 
         <table class="table table-striped-columns">
             <a href="" class="btn btn-md btn-success mb-3"><i class="fa fa-plus-circle"></i> ADD NEW ({{ Auth::user()->name }})</a>
             <thead>
-                <tr class="table-success">
-                    <th scope="col">
-                        <center>ID
-                    </th>
-                    <th scope="col">
-                        <center>Name
-                    </th>
-                    <th scope="col">
-                        <center>Email
-                    </th>
-                    <th scope="col">
-                        <center>Email Verified At
-                    </th>
-                    <th scope="col">
-                        <center>Role
-                    </th>
-                    <th scope="col" colspan="2">
-                        <center>Action
-                    </th>
+                <tr class="table-success text-center">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Email Verified At</th>
+                    <th>Role</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 

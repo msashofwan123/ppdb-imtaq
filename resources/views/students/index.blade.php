@@ -76,11 +76,8 @@
 
                 @endforelse
             </tbody>
-            <!-- Akhir Data Table -->
         </table>
-        <div>
-            <!-- {{ $students->Links() }} -->
-        </div>
+        <!-- Akhir Data Table -->
     </div>
 
     <?php include('style/script.php'); ?>
