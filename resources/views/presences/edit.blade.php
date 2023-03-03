@@ -31,36 +31,12 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Schedule Id</label>
                                 <input type="hidden" name="schedule_id" id="schedule_id" value="{{ $presence->schedule->id }}">
-                                <select type="text" class="form-control  @error('schedule_id') is-invalid @enderror" name="schedule_id" id="schedule_id" disabled>
-                                    <option>Pilih Schedule</option>
-                                    @foreach ($schedule as $item)
-                                    <option value="{{ $item->id }}" {{ $item->id == $selectedIds->schedule_id ? 'selected' : '' }}>{{ $item->id }}. ({{ $item->group->name }})</option>
-                                    @endforeach
-                                </select>
-
-                                <!-- error message untuk schedule_id -->
-                                @error('schedule_id')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
+                                <input class="form-control" type="text" disabled value="{{ $presence->schedule->id }}. {{ $presence->schedule->group->name }}">
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Student Id</label>
                                 <input type="hidden" name="student_id" id="student_id" value="{{ $presence->student->id }}">
-                                <select type="text" class="form-control  @error('student_id') is-invalid @enderror" name="student_id" id="student_id" disabled>
-                                    <option>Pilih Student</option>
-                                    @foreach ($student as $item)
-                                    <option value="{{ $item->id }}" {{ $item->id == $selectedIds->student_id ? 'selected' : '' }}>{{ $item->id }}. ({{ $item->user->name }})</option>
-                                    @endforeach
-                                </select>
-
-                                <!-- error message untuk student_id -->
-                                @error('student_id')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                                @enderror
+                                <input class="form-control" type="text" disabled value="{{ $presence->student->id }}. {{ $presence->student->user->name }}">
                             </div>
                             <br />
                             <div class="form-group">
@@ -71,7 +47,7 @@
                                     <label class="form-check-label" for="presence1">Hadir</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence2" value="Sakit" {{ $presence->presence == 'Sakir' ? 'checked' : '' }}>
+                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="presence" id="presence2" value="Sakit" {{ $presence->presence == 'Sakit' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="presence2">Sakit</label>
                                 </div>
                                 <div class="form-check form-check-inline">
