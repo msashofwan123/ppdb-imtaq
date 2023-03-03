@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Questions</div>
                 <div class="card-body">
@@ -79,7 +79,7 @@
                                         </table>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/questions/' . $item->id) }}" title="View Question"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                        <!-- <a href="{{ url('/questions/' . $item->id) }}" title="View Question"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a> -->
                                         <a href="{{ url('/questions/' . $item->id . '/edit') }}" title="Edit Question"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 
                                         <form method="POST" action="{{ url('/questions' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">

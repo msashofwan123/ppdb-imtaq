@@ -61,8 +61,9 @@ class QuizzesController extends Controller
         $requestData = $request->all();
         
         Quiz::create($requestData);
-        $check = $request->quiz_id;
-        return redirect('questions/'.$check)->with('flash_message', 'Quiz added!');
+        // $check = $request->quiz_id;
+        // return redirect('questions/'.$check)->with('flash_message', 'Quiz added!');
+        return redirect()->route('quizzes.index')->with('flash_message', 'Quiz added!');
     }
 
     /**

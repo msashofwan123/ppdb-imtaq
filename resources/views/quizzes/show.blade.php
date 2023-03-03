@@ -18,7 +18,7 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>ID Quiz</th>
                                     <td>{{ $quiz->id }}</td>
                                 </tr>
                                 <tr>
@@ -27,7 +27,7 @@
                                 </tr>
                                 <tr>
                                     <th> Group Id </th>
-                                    <td> {{ $quiz->group_id }} </td>
+                                    <td> {{ $quiz->group_id }} - {{ $quiz->name }} </td>
                                 </tr>
                             </tbody>
                         </table>

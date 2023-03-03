@@ -18,7 +18,7 @@
     </select>
     {!! $errors->first('group_id', '<p class="help-block">:message</p>') !!}
 </div>
-
+<br />
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">
 </div>

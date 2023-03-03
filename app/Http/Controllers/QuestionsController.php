@@ -60,7 +60,9 @@ class QuestionsController extends Controller
         
         $requestData = $request->all();
         Question::create($requestData);
-        return redirect('questions')->with('flash_message', 'Question added!');
+        return back()->with('flash_message', 'Question added!');
+
+        // return redirect('questions')->with('flash_message', 'Question added!');
     }
 
     /**

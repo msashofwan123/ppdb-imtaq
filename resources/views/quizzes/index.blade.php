@@ -35,7 +35,7 @@
                                 @foreach($quizzes as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->group_id }}</td>
+                                        <td>{{ $item->name }}</td><td>{{ $item->group_id }}. {{ $item->name }}</td>
                                         <td>
                                             <a href="{{ url('/quizzes/' . $item->id) }}" title="View Quiz"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/quizzes/' . $item->id . '/edit') }}" title="Edit Quiz"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
