@@ -14,6 +14,7 @@ use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizzesController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\UserAnswerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,9 @@ Route::middleware(['auth', 'user-access'])->group(function () {
     Route::resource('quizzes', QuizzesController::class);
     Route::resource('presences', PresenceController::class);
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/members/{id}/create', [MemberController::class, 'create'])->name('members.create');
+    Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
+    Route::resource('questions', QuestionsController::class);
 });
 
 // Route::resource('/posts', \App\Http\Controllers\PostController::class);
@@ -55,6 +59,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/members/{id}/create', [MemberController::class, 'create'])->name('members.create');
-Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
-Route::resource('questions', QuestionsController::class);
+Route::resource('user-answer', UserAnswerController::class);
