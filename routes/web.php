@@ -60,3 +60,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('user-answer', UserAnswerController::class);
+Route::get('/user-answer/{id}/create', [UserAnswerController::class, 'create'])->name('user-answer');

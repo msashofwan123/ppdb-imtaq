@@ -74,20 +74,20 @@
                                     <input type="hidden" name="items[{{ $item->id }}][student_id]" value="{{ $item->student_id }}">
                                     <td>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence1" value="Hadir">
-                                            <label class="form-check-label" for="presence1">Hadir</label>
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence1{{ $item->id }}" value="Hadir">
+                                            <label class="form-check-label" for="presence1{{ $item->id }}">Hadir</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence2" value="Sakit">
-                                            <label class="form-check-label" for="presence2">Sakit</label>
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence2{{ $item->id }}" value="Sakit">
+                                            <label class="form-check-label" for="presence2{{ $item->id }}">Sakit</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3" value="Izin">
-                                            <label class="form-check-label" for="presence3">Izin</label>
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence3{{ $item->id }}" value="Izin">
+                                            <label class="form-check-label" for="presence3{{ $item->id }}">Izin</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence4" value="Alfa">
-                                            <label class="form-check-label" for="presence4">Alfa</label>
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio" name="items[{{ $item->id }}][presence]" id="presence4{{ $item->id }}" value="Alfa">
+                                            <label class="form-check-label" for="presence4{{ $item->id }}">Alfa</label>
                                         </div>
                                         <!-- error message untuk presence -->
                                         @error('presence')

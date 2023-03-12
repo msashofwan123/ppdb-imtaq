@@ -19,7 +19,9 @@ class StudentController extends Controller
     public function index()
     {
         //get students
-        $students = Student::latest()->paginate(20);
+        $students = Student::latest()->whereHas('user', function($query){
+            $query->where('role', 'member');
+        })->get();
 
         //render view with students
         return view('students.index', compact('students'));

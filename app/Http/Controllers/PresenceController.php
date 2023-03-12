@@ -56,11 +56,11 @@ class PresenceController extends Controller
         $schedule = Schedule::find($request->scheduleid);
         $schedule->note = $request->subject;
         $schedule->save();
-        echo var_dump($schedule);
+        // echo var_dump($schedule);
 
         foreach ($SendData as $itemdata) {
 
-        //     // \Log::info($itemdata['schedule_id']);
+            // \Log::info($itemdata['schedule_id']);
 
             $item = new Presence();
             $item->schedule_id = $itemdata['schedule_id'];

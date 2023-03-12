@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\Models\UserAnswer;
+use App\Models\Question;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class UserAnswerController extends Controller
@@ -37,9 +39,14 @@ class UserAnswerController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($id)
     {
-        return view('user-answer.create');
+        $question = Question::where('quiz_id', $id)->get();
+        $user_id = auth()->id();
+
+        // echo var_dump($question);
+        // die();
+        return view('user-answer.create', compact('question', 'user_id'));
     }
 
     /**
@@ -51,12 +58,26 @@ class UserAnswerController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $requestData = $request->all();
-        
-        UserAnswer::create($requestData);
+        $sendData = $request->input('items');
+        $request->validate([
+            'items' => 'required|array',
+            'items.*.user_id' => 'required|numeric',
+            'items.*.question_id' => 'required|numeric',
+            'items.*.answer' => 'required|numeric',
+        ]);
 
-        return redirect('user-answer')->with('flash_message', 'UserAnswer added!');
+        foreach ($sendData as $itemData) {
+            $item = new UserAnswer();
+            $item->user_id = $itemData['user_id'];
+            $item->question_id = $itemData['question_id'];
+            $item->answer = $itemData['answer'];
+            $item->saveOrFail();
+        }
+
+        // echo var_dump($);
+        // die();
+        return redirect()->route('quizzes.index')->with(['success', 'Data Berhasil Disimpan!']);
+        // return view('quiz')->with('flash_message', 'UserAnswer added!');
     }
 
     /**
@@ -97,9 +118,9 @@ class UserAnswerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
         $useranswer = UserAnswer::findOrFail($id);
         $useranswer->update($requestData);
 

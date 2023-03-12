@@ -45,7 +45,7 @@
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Quiz" onclick="return confirm('&quot;Confirm delete?&quot;')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
-                                            <a href="{{ url('/user-answer/' . $item->id) }}" title="Quiz"><button class="btn btn-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Quiz</button></a>
+                                            <a href="{{ url('/user-answer/' . $item->id . '/create') }}" title="Quiz"><button class="btn btn-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Quiz</button></a>
                                         </td>
                                     </tr>
                                 @endforeach
