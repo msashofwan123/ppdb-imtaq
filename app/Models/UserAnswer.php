@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Model;
 
 class UserAnswer extends Model
@@ -31,9 +32,13 @@ class UserAnswer extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    // public function question()
+    // {
+    //     return $this->belongsTo('App\Models\Questions');
+    // }
     public function question()
     {
-        return $this->belongsTo('App\Models\Questions');
+        return $this->belongsTo(Question::class);
     }
     
 }

@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+<head>
+    <link rel="stylesheet" href="style/user.css">
+</head>
 <div class="container">
     <div class="row">
         <div class="col-md-9">
@@ -32,6 +35,7 @@
                                     <th>User Id</th>
                                     <th>Question Id</th>
                                     <th>Answer</th>
+                                    <th>Validation</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -42,6 +46,13 @@
                                     <td>{{ $item->user_id }}</td>
                                     <td>{{ $item->question_id }}</td>
                                     <td>{{ $item->answer }}</td>
+                                    <td class="text-center">
+                                        @if ( $item->answer == $item->question->correct_answer)
+                                        <span class="highlight highlight-correct">Correct</span>
+                                        @else
+                                        <span class="highlight highlight-wrong">Wrong</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ url('/user-answer/' . $item->id) }}" title="View UserAnswer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                         <a href="{{ url('/user-answer/' . $item->id . '/edit') }}" title="Edit UserAnswer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

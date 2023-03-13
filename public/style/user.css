@@ -23,3 +23,13 @@
     background-color: yellow;
     color: black;
 }
+
+.highlight-correct {
+    background-color: green;
+    color: white;
+}
+
+.highlight-wrong {
+    background-color: tomato;
+    color: white;
+}
