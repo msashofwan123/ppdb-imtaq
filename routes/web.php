@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MemberController;
@@ -36,6 +37,8 @@ Route::get('/', function () {
 // route::resource('/students', \App\Http\Controllers\StudentsController::class);
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/surveys', [SurveyController::class, 'index']);
+Route::post('/surveys', [SurveyController::class, 'store']);
 
 Route::post('login', ['as' => 'login', 'uses' => 'LoginController@login']);
 Route::middleware(['auth', 'user-access'])->group(function () {
