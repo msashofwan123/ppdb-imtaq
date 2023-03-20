@@ -64,3 +64,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('user-answer', UserAnswerController::class);
 Route::get('/user-answer/{id}/create', [UserAnswerController::class, 'create'])->name('user-answer');
+
+// Route Api
+Route::get('/surveys/json', [SurveyController::class, 'getData']);
