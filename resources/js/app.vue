@@ -1,9 +1,21 @@
 <template>
   <div class="container py-4">
     <header class="pb-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4">SD IDBC OFFICIAL</span>
-      </a>
+      <div class="row">
+        <div class="col-lg-4">
+          <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-4">SD IDBC OFFICIAL</span>
+          </a>
+        </div>
+        <div class="col-lg-4 text-center bg-success rounded text-success px-0">
+          <h2 class="bg-white mx-5 mt-2 rounded">{{ formatTime(hour) }}:{{ formatTime(minute) }}:{{ formatTime(second) }}
+            WIB</h2>
+        </div>
+
+        <div class="col-lg-4 text-end">
+          <h3>{{ day }}, {{ date }} {{ month }} {{ year }}</h3>
+        </div>
+      </div>
     </header>
 
     <div class="p-4 mb-4 bg-light border rounded-3">
@@ -59,31 +71,80 @@ import { shallowReadonly } from 'vue';
 
 export default {
 
+  data() {
+    return {
+      day: '',
+      date: '',
+      month: '',
+      year: '',
+      hour: '',
+      minute: '',
+      second: ''
+    };
+  },
+  created() {
+    this.updateTime();
+    setInterval(() => {
+      this.updateTime();
+    }, 1000);
+  },
+
+
   methods: {
+
+    updateTime() {
+      const weekdays = ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+      const today = new Date();
+
+      this.day = weekdays[today.getDay()];
+      this.date = today.getDate();
+      this.month = months[today.getMonth()];
+      this.year = today.getFullYear();
+      this.hour = today.getHours();
+      this.minute = today.getMinutes();
+      this.second = today.getSeconds();
+    },
+    formatTime(time) {
+      return time.toString().padStart(2, '0');
+    },
+
+
 
     survey(value) {
       let opt;
+
       if (value == 1) {
-        opt = "Sangat Puas"
-        Swal.fire(
-          'Terima Kasih!',
-          'Atas Partisipasinya Dalam Survei Kami😸',
-          'success'
-        )
+        opt = "Sangat Puas",
+          Swal.fire({
+            icon: 'success',
+            title: 'Terima Kasih',
+            text: 'Atas Partisipasinya Dalam Survei Kami😸',
+            timer: 5000,
+            allowOutsideClick: false,
+            showConfirmButton: false
+          })
       } else if (value == 2) {
         opt = "Puas"
-        Swal.fire(
-          'Terima Kasih!',
-          'Atas Partisipasinya Dalam Survei Kami😸',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Terima Kasih',
+          text: 'Atas Partisipasinya Dalam Survei Kami😸',
+          timer: 5000,
+          allowOutsideClick: false,
+          showConfirmButton: false
+        })
       } else if (value == 3) {
         opt = "Kecewa"
-        Swal.fire(
-          'Terima Kasih!',
-          'Atas Partisipasinya Dalam Survei Kami😸',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Terima Kasih',
+          text: 'Atas Partisipasinya Dalam Survei Kami😸',
+          timer: 5000,
+          allowOutsideClick: false,
+          showConfirmButton: false
+        })
       }
 
       console.log(`Anda Memilih Opsi`, opt);
@@ -105,26 +166,5 @@ export default {
     }
   },
 
-  // PROGRESS BAR
-  // data() {
-  //   return {
-  //     value1: 0,
-  //     value2: 0,
-  //     value3: 0,
-  //     total: 0
-  //   }
-  // },
-  // mounted() {
-  //   axios.get('/surveys/json')
-  //     .then(response => {
-  //       this.value1 = response.data.value1;
-  //       this.value2 = response.data.value2;
-  //       this.value3 = response.data.value3;
-  //       this.total = response.data.total;
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }
 }
 </script>
